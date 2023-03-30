@@ -1,0 +1,22 @@
+{
+  "name": "oniro-ide-extension",
+  "keywords": [
+    "theia-extension"
+  ],
+  "version": "0.0.0",
+  "dependencies": {
+    "@theia/core": "1.35.0"
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+    "clean": "shx rm -rf lib",
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "theiaExtensions": [
+    {
+      "frontend": "lib/browser/oniro-ide-frontend-module"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "engines": {
+    "yarn": ">=1.7.0 <2",
+    "node": ">=16.14.0"
+  },
+  "workspaces": [
+    "oniro-ide-extension",
+    "apps/*"
+  ],
+  "scripts": {
+    "postinstall": "theia check:theia-version",
+    "compile": "lerna run build",
+    "browser": "yarn -s --cwd apps/browser",
+    "electron": "yarn -s --cwd apps/electron",
+    "watch": "lerna run watch --scope=oniro-ide-extension"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.1",
+    "lerna": "^6.6.1",
+    "shx": "^0.3.4",
+    "typescript": "^5.0.2"
+  }
+}

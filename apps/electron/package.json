@@ -10,6 +10,7 @@
     "@theia/debug": "1.35.0",
     "@theia/editor": "1.35.0",
     "@theia/editor-preview": "1.35.0",
+    "@theia/electron": "1.35.0",
     "@theia/file-search": "1.35.0",
     "@theia/filesystem": "1.35.0",
     "@theia/getting-started": "1.35.0",
@@ -53,7 +54,7 @@
   },
   "scripts": {
     "build": "theia build --mode development",
-    "start": "theia start",
+    "start": "theia start --plugins=local-dir:../../plugins",
     "watch:compile": "lerna run watch --scope=oniro-ide-extension",
     "watch:bundle": "theia build --watch --mode development",
     "rebuild": "theia rebuild:electron --cacheRoot ../.."

@@ -22,7 +22,7 @@
     "concurrently": "^8.0.1",
     "lerna": "^6.6.1",
     "shx": "^0.3.4",
-    "typescript": "^5.0.2"
+    "typescript": "^4.9.5"
   },
   "theiaPluginsDir": "plugins",
   "theiaPlugins": {

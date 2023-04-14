@@ -1,7 +1,7 @@
 import { CompoundMenuNodeRole, MAIN_MENU_BAR, MenuContribution, MenuModelRegistry, nls } from "@theia/core";
 import { injectable } from "@theia/core/shared/inversify";
 import { BUILD_TARGET_COMMAND, CLEAN_TARGETS_COMMAND, TARGET_OPTIONS_COMMAND, REBUILD_TARGET_COMMAND, REMOVE_ITEM_COMMAND, SELECT_DEVICE_COMMAND, BATCH_BUILD_COMMAND, 
-    CLOSE_PROJECT_COMMAND, NEW_MULTI_WORKSPACE_COMMAND, NEW_PROJECT_COMMAND, OPEN_PROJECT_COMMAND, STOP_BUILD_COMMAND } from "../commands/project-commands";
+    CLOSE_PROJECT_COMMAND, NEW_MULTI_WORKSPACE_COMMAND, NEW_PROJECT_COMMAND, OPEN_PROJECT_COMMAND, STOP_BUILD_COMMAND, TRANSLATES_COMMAND } from "../commands/project-commands";
 
 
 @injectable()
@@ -74,11 +74,12 @@ export class ProjectMenuContribution implements MenuContribution {
             order: '4'
         });
         menus.registerMenuAction(buildSubmenuPath, {
-            commandId: 'Translate'
+            commandId: TRANSLATES_COMMAND.id,
+            order: '5'
         });
         menus.registerMenuAction(buildSubmenuPath, {
             commandId: STOP_BUILD_COMMAND.id,
-            order: '5'
+            order: '6'
         });
     }
 

@@ -43,6 +43,11 @@ export const BATCH_BUILD_COMMAND = Command.toDefaultLocalizedCommand({
     label: 'Batch build...'
 });
 
+export const TRANSLATES_COMMAND = Command.toDefaultLocalizedCommand({
+    id: 'translate-project',
+    label: 'Translate...'
+});
+
 export const STOP_BUILD_COMMAND = Command.toDefaultLocalizedCommand({
     id: 'stop-build',
     label: 'Stop build'
@@ -81,6 +86,7 @@ export class ProjectCommandContribution implements CommandContribution {
         commands.registerCommand(BUILD_TARGET_COMMAND, {execute: () => {}});
         commands.registerCommand(REBUILD_TARGET_COMMAND, {execute: () => {}});
         commands.registerCommand(BATCH_BUILD_COMMAND, {execute: () => {}});
+        commands.registerCommand(TRANSLATES_COMMAND, {execute: () => {}});
         commands.registerCommand(STOP_BUILD_COMMAND, {execute: () => {}});
     }
 

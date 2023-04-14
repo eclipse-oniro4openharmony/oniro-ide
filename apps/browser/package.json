@@ -10,7 +10,6 @@
     "@theia/debug": "1.35.0",
     "@theia/editor": "1.35.0",
     "@theia/editor-preview": "1.35.0",
-    "@theia/electron": "1.35.0",
     "@theia/file-search": "1.35.0",
     "@theia/filesystem": "1.35.0",
     "@theia/getting-started": "1.35.0",

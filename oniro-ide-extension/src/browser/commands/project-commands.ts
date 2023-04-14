@@ -5,69 +5,69 @@ import { injectable } from "@theia/core/shared/inversify";
 export const NEW_PROJECT_COMMAND = Command.toLocalizedCommand({
     id: 'oniro.new-project',
     label: 'New Project'
-}, 'oniro/newProject');
+}, 'oniro/projectMenu/newProject');
 
 export const NEW_MULTI_WORKSPACE_COMMAND = Command.toLocalizedCommand({
     id: 'oniro.new-multi-project-workspace',
     label: 'new Multi-Project Worksapce...'
-}, 'oniro/newMultiProjectWorkspace');
+}, 'oniro/projectMenu/newMultiProjectWorkspace');
 
 export const OPEN_PROJECT_COMMAND = Command.toLocalizedCommand({
     id: 'oniro.open-project',
     label: 'Open Project'
-}, 'oniro/openProject');
+}, 'oniro/projectMenu/openProject');
 
 export const CLOSE_PROJECT_COMMAND = Command.toLocalizedCommand({
     id: 'oniro.close-project',
     label: 'Close Project'
-}, 'oniro/closeProject');
+}, 'oniro/projectMenu/closeProject');
 
 // build commands
 export const CLEAN_TARGETS_COMMAND = Command.toLocalizedCommand({
     id: 'oniro.clean-targets',
     label: 'Clean Targets'
-}, 'oniro/cleanTargets');
+}, 'oniro/projectMenu/cleanTargets');
 
 export const BUILD_TARGET_COMMAND = Command.toLocalizedCommand({
     id: 'oniro.build-target',
     label: 'Build Targets'
-}, 'oniro/buildTargets');
+}, 'oniro/projectMenu/buildTargets');
 
 export const REBUILD_TARGET_COMMAND = Command.toLocalizedCommand({
     id: 'oniro.rebuild-targets',
     label: 'Rebuild all target files'
-}, 'oniro/rebuildTargets');
+}, 'oniro/projectMenu/rebuildTargets');
 
 export const BATCH_BUILD_COMMAND = Command.toLocalizedCommand({
     id: 'oniro.batch-build',
     label: 'Batch build...'
-}, 'oniro/batchBuild');
+}, 'oniro/projectMenu/batchBuild');
 
 export const TRANSLATE_COMMAND = Command.toLocalizedCommand({
     id: 'oniro.translate-project',
     label: 'Translate...'
-}, 'oniro/translate');
+}, 'oniro/projectMenu/translate');
 
 export const STOP_BUILD_COMMAND = Command.toLocalizedCommand({
     id: 'oniro.stop-build',
     label: 'Stop build'
-}, 'oniro/stopBuild');
+}, 'oniro/projectMenu/stopBuild');
 
 // project config commands
 export const SELECT_DEVICE_COMMAND = Command.toLocalizedCommand({
     id: 'oniro.device-select',
     label: 'Select Device...'
-}, 'oniro/selectDevice');
+}, 'oniro/projectMenu/selectDevice');
 
 export const REMOVE_ITEM_COMMAND = Command.toLocalizedCommand({
     id: 'oniro.remove-project-item',
     label: 'Remove Item'
-}, 'oniro/removeItem');
+}, 'oniro/projectMenu/removeItem');
 
 export const TARGET_OPTIONS_COMMAND = Command.toLocalizedCommand({
     id: 'oniro.target-options',
     label: 'Options...'
-}, 'oniro/targetOptions');
+}, 'oniro/projectMenu/targetOptions');
 
 @injectable()
 export class ProjectCommandContribution implements CommandContribution {

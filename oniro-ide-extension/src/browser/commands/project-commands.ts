@@ -26,7 +26,7 @@ export const CLOSE_PROJECT_COMMAND = Command.toLocalizedCommand({
 export const CLEAN_TARGETS_COMMAND = Command.toLocalizedCommand({
     id: 'oniro.clean-targets',
     label: 'Clean Targets'
-}, , 'oniro/cleanTargets');
+}, 'oniro/cleanTargets');
 
 export const BUILD_TARGET_COMMAND = Command.toLocalizedCommand({
     id: 'oniro.build-target',

@@ -2,72 +2,72 @@ import { Command, CommandContribution, CommandRegistry } from "@theia/core";
 import { injectable } from "@theia/core/shared/inversify";
 
 // project commands
-export const NEW_PROJECT_COMMAND = Command.toDefaultLocalizedCommand({
-    id: 'new-project',
+export const NEW_PROJECT_COMMAND = Command.toLocalizedCommand({
+    id: 'oniro.new-project',
     label: 'New Project'
-});
+}, 'oniro/newProject');
 
-export const NEW_MULTI_WORKSPACE_COMMAND = Command.toDefaultLocalizedCommand({
-    id: 'new-multi-project-workspace',
+export const NEW_MULTI_WORKSPACE_COMMAND = Command.toLocalizedCommand({
+    id: 'oniro.new-multi-project-workspace',
     label: 'new Multi-Project Worksapce...'
-});
+}, 'oniro/newMultiProjectWorkspace');
 
-export const OPEN_PROJECT_COMMAND = Command.toDefaultLocalizedCommand({
-    id: 'open-project',
+export const OPEN_PROJECT_COMMAND = Command.toLocalizedCommand({
+    id: 'oniro.open-project',
     label: 'Open Project'
-});
+}, 'oniro/openProject');
 
-export const CLOSE_PROJECT_COMMAND = Command.toDefaultLocalizedCommand({
-    id: 'close-project',
+export const CLOSE_PROJECT_COMMAND = Command.toLocalizedCommand({
+    id: 'oniro.close-project',
     label: 'Close Project'
-});
+}, 'oniro/closeProject');
 
 // build commands
-export const CLEAN_TARGETS_COMMAND = Command.toDefaultLocalizedCommand({
-    id: 'clean-targets',
+export const CLEAN_TARGETS_COMMAND = Command.toLocalizedCommand({
+    id: 'oniro.clean-targets',
     label: 'Clean Targets'
-});
+}, , 'oniro/cleanTargets');
 
-export const BUILD_TARGET_COMMAND = Command.toDefaultLocalizedCommand({
-    id: 'build-target',
+export const BUILD_TARGET_COMMAND = Command.toLocalizedCommand({
+    id: 'oniro.build-target',
     label: 'Build Targets'
-});
+}, 'oniro/buildTargets');
 
-export const REBUILD_TARGET_COMMAND = Command.toDefaultLocalizedCommand({
-    id: 'rebuild-targets',
+export const REBUILD_TARGET_COMMAND = Command.toLocalizedCommand({
+    id: 'oniro.rebuild-targets',
     label: 'Rebuild all target files'
-});
+}, 'oniro/rebuildTargets');
 
-export const BATCH_BUILD_COMMAND = Command.toDefaultLocalizedCommand({
-    id: 'batch-build',
+export const BATCH_BUILD_COMMAND = Command.toLocalizedCommand({
+    id: 'oniro.batch-build',
     label: 'Batch build...'
-});
+}, 'oniro/batchBuild');
 
-export const TRANSLATES_COMMAND = Command.toDefaultLocalizedCommand({
-    id: 'translate-project',
+export const TRANSLATE_COMMAND = Command.toLocalizedCommand({
+    id: 'oniro.translate-project',
     label: 'Translate...'
-});
+}, 'oniro/translate');
 
-export const STOP_BUILD_COMMAND = Command.toDefaultLocalizedCommand({
-    id: 'stop-build',
+export const STOP_BUILD_COMMAND = Command.toLocalizedCommand({
+    id: 'oniro.stop-build',
     label: 'Stop build'
-});
+}, 'oniro/stopBuild');
 
 // project config commands
-export const SELECT_DEVICE_COMMAND = Command.toDefaultLocalizedCommand({
-    id: 'device-select',
+export const SELECT_DEVICE_COMMAND = Command.toLocalizedCommand({
+    id: 'oniro.device-select',
     label: 'Select Device...'
-});
+}, 'oniro/selectDevice');
 
-export const REMOVE_ITEM_COMMAND = Command.toDefaultLocalizedCommand({
-    id: 'remove-project-item',
+export const REMOVE_ITEM_COMMAND = Command.toLocalizedCommand({
+    id: 'oniro.remove-project-item',
     label: 'Remove Item'
-});
+}, 'oniro/removeItem');
 
-export const TARGET_OPTIONS_COMMAND = Command.toDefaultLocalizedCommand({
-    id: 'target-options',
+export const TARGET_OPTIONS_COMMAND = Command.toLocalizedCommand({
+    id: 'oniro.target-options',
     label: 'Options...'
-});
+}, 'oniro/targetOptions');
 
 @injectable()
 export class ProjectCommandContribution implements CommandContribution {
@@ -86,7 +86,7 @@ export class ProjectCommandContribution implements CommandContribution {
         commands.registerCommand(BUILD_TARGET_COMMAND, {execute: () => {}});
         commands.registerCommand(REBUILD_TARGET_COMMAND, {execute: () => {}});
         commands.registerCommand(BATCH_BUILD_COMMAND, {execute: () => {}});
-        commands.registerCommand(TRANSLATES_COMMAND, {execute: () => {}});
+        commands.registerCommand(TRANSLATE_COMMAND, {execute: () => {}});
         commands.registerCommand(STOP_BUILD_COMMAND, {execute: () => {}});
     }
 

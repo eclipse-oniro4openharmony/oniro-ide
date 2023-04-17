@@ -52,7 +52,7 @@
   },
   "scripts": {
     "build": "theia build --mode development",
-    "start": "theia start",
+    "start": "theia start --plugins=local-dir:../../plugins",
     "watch": "concurrently -c blue,yellow -n tsc,webpack \"yarn watch:compile\" \"yarn watch:bundle\"",
     "watch:compile": "lerna run watch --scope=oniro-ide-extension",
     "watch:bundle": "theia build --watch --mode development",

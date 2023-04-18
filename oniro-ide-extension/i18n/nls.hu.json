@@ -1,0 +1,20 @@
+{
+  "oniro": {
+    "projectMenu": {
+      "batchBuild": "Batch build...",
+      "buildTargets": "Célok építése",
+      "cleanTargets": "Tiszta célok",
+      "closeProject": "Projekt bezárása",
+      "newMultiProjectWorkspace": "Új több projektet tartalmazó munkaterület...",
+      "newProject": "Új projekt",
+      "openProject": "Nyílt projekt",
+      "project": "Projekt",
+      "rebuildTargets": "Az összes célfájl újraépítése",
+      "removeItem": "Tétel eltávolítása",
+      "selectDevice": "Eszköz kiválasztása...",
+      "stopBuild": "Stop build",
+      "targetOptions": "Lehetőségek...",
+      "translate": "Fordítsd le..."
+    }
+  }
+}

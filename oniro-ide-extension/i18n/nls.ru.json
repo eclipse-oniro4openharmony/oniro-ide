@@ -1,0 +1,20 @@
+{
+  "oniro": {
+    "projectMenu": {
+      "batchBuild": "Пакетная сборка...",
+      "buildTargets": "Цели строительства",
+      "cleanTargets": "Чистые цели",
+      "closeProject": "Закрыть проект",
+      "newMultiProjectWorkspace": "Новое рабочее пространство для нескольких проектов...",
+      "newProject": "Новый проект",
+      "openProject": "Открытый проект",
+      "project": "Проект",
+      "rebuildTargets": "Перестройте все целевые файлы",
+      "removeItem": "Удалить товар",
+      "selectDevice": "Выберите устройство...",
+      "stopBuild": "Остановить строительство",
+      "targetOptions": "Опции...",
+      "translate": "Переведите..."
+    }
+  }
+}

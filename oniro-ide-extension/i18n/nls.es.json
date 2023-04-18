@@ -1,0 +1,20 @@
+{
+  "oniro": {
+    "projectMenu": {
+      "batchBuild": "Construcción por lotes...",
+      "buildTargets": "Construir objetivos",
+      "cleanTargets": "Objetivos limpios",
+      "closeProject": "Cerrar Proyecto",
+      "newMultiProjectWorkspace": "Nuevo espacio de trabajo multiproyecto...",
+      "newProject": "Nuevo proyecto",
+      "openProject": "Proyecto abierto",
+      "project": "Proyecto",
+      "rebuildTargets": "Reconstruir todos los archivos de destino",
+      "removeItem": "Quitar artículo",
+      "selectDevice": "Seleccionar dispositivo...",
+      "stopBuild": "Dejar de construir",
+      "targetOptions": "Opciones...",
+      "translate": "Traduce..."
+    }
+  }
+}

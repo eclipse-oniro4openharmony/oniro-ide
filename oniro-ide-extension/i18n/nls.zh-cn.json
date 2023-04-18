@@ -1,0 +1,20 @@
+{
+  "oniro": {
+    "projectMenu": {
+      "batchBuild": "批量建造...",
+      "buildTargets": "建设目标",
+      "cleanTargets": "清洁目标",
+      "closeProject": "关闭项目",
+      "newMultiProjectWorkspace": "新的多项目工作区...",
+      "newProject": "新项目",
+      "openProject": "开放项目",
+      "project": "项目",
+      "rebuildTargets": "重建所有目标文件",
+      "removeItem": "移除项目",
+      "selectDevice": "选择设备...",
+      "stopBuild": "停止建造",
+      "targetOptions": "选项...",
+      "translate": "翻译..."
+    }
+  }
+}

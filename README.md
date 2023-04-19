@@ -11,7 +11,9 @@ Please make sure that your system follows the [Theia development prerequisites](
 You can build both browser and electron application by running the following script:
 
 ```
-yarn && yarn build
+yarn
+yarn compile
+yarn download:plugins
 ```
 
 ### Running

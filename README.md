@@ -43,3 +43,17 @@ Or
 ```
 yarn electron watch
 ```
+
+### Running in Docker container
+
+To create the docker image `oniro-ide`:
+```
+docker build -t oniro-ide .
+```
+
+To start the container `oniro-ide-container`:
+```
+docker run -dp 3000:3000 --name oniro-ide-container oniro-ide
+```
+
+When you open the browser at `http://localhost:3000/` you will see the browser version of the IDE.

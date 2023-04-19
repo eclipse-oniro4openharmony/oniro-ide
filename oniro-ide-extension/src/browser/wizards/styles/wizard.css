@@ -1,0 +1,16 @@
+.wizard-content-panel {
+    width: 60vw;
+}
+
+.wizard-page-title {
+    margin-bottom: 15px;
+    padding-left: 5px;
+    border-bottom: 1px solid gray;
+}
+
+.theia-TreeNode.theia-mod-selected {
+    background: var(--theia-list-activeSelectionBackground);
+    color: var(--theia-list-activeSelectionForeground) !important;
+    outline: var(--theia-focusBorder) solid 1px;
+    outline-offset: -1px;
+}

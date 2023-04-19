@@ -1,0 +1,20 @@
+{
+  "oniro": {
+    "projectMenu": {
+      "batchBuild": "Dávkové sestavení...",
+      "buildTargets": "Cíle stavby",
+      "cleanTargets": "Čisté cíle",
+      "closeProject": "Zavřít projekt",
+      "newMultiProjectWorkspace": "Nový pracovní prostor pro více projektů...",
+      "newProject": "Nový projekt",
+      "openProject": "Otevřený projekt",
+      "project": "Projekt",
+      "rebuildTargets": "Přestavět všechny cílové soubory",
+      "removeItem": "Odebrat položku",
+      "selectDevice": "Vyberte zařízení...",
+      "stopBuild": "Zastavit stavbu",
+      "targetOptions": "Možnosti...",
+      "translate": "Přeložit..."
+    }
+  }
+}

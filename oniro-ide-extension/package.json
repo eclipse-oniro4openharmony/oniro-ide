@@ -16,7 +16,8 @@
   },
   "theiaExtensions": [
     {
-      "frontend": "lib/browser/oniro-ide-frontend-module"
+      "frontend": "lib/browser/oniro-ide-frontend-module",
+      "backend": "lib/node/oniro-ide-backend-module"
     }
   ]
 }

@@ -14,7 +14,8 @@
     "browser": "yarn -s --cwd apps/browser",
     "electron": "yarn -s --cwd apps/electron",
     "watch": "lerna run watch --scope=oniro-ide-extension",
-    "download:plugins": "theia download:plugins"
+    "download:plugins": "theia download:plugins",
+    "translation:update": "node ./scripts/translation-update.js"
   },
   "devDependencies": {
     "@theia/cli": "1.35.0",

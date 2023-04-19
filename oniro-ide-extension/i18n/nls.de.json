@@ -1,0 +1,20 @@
+{
+  "oniro": {
+    "projectMenu": {
+      "batchBuild": "Stapelverarbeitung...",
+      "buildTargets": "Ziele aufbauen",
+      "cleanTargets": "Säubere Ziele",
+      "closeProject": "Projekt schließen",
+      "newMultiProjectWorkspace": "Neuer Multiprojekt-Arbeitsbereich...",
+      "newProject": "Neues Projekt",
+      "openProject": "Öffne Projekt",
+      "project": "Projekt",
+      "rebuildTargets": "Alle Zieldateien neu erstellen",
+      "removeItem": "Artikel entfernen",
+      "selectDevice": "Gerät auswählen...",
+      "stopBuild": "Stop bauen",
+      "targetOptions": "Optionen...",
+      "translate": "Übersetzen..."
+    }
+  }
+}

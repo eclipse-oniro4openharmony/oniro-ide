@@ -1,0 +1,20 @@
+{
+  "oniro": {
+    "projectMenu": {
+      "batchBuild": "バッチビルド...",
+      "buildTargets": "ビルドターゲット",
+      "cleanTargets": "クリーンターゲット",
+      "closeProject": "プロジェクト終了",
+      "newMultiProjectWorkspace": "新しいマルチプロジェクト・ワークスペース...",
+      "newProject": "新プロジェクト",
+      "openProject": "オープンプロジェクト",
+      "project": "プロジェクト",
+      "rebuildTargets": "すべてのターゲットファイルをリビルドする",
+      "removeItem": "項目を削除する",
+      "selectDevice": "デバイスを選択する...",
+      "stopBuild": "ストップビルド",
+      "targetOptions": "オプション...",
+      "translate": "翻訳する..."
+    }
+  }
+}

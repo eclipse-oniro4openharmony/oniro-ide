@@ -1,0 +1,20 @@
+{
+  "oniro": {
+    "projectMenu": {
+      "batchBuild": "Budować partiami...",
+      "buildTargets": "Budowanie celów",
+      "cleanTargets": "Czyste cele",
+      "closeProject": "Zamknij projekt",
+      "newMultiProjectWorkspace": "Nowy obszar roboczy dla wielu projektów...",
+      "newProject": "Nowy projekt",
+      "openProject": "Projekt otwarty",
+      "project": "Projekt",
+      "rebuildTargets": "Przebudować wszystkie pliki docelowe",
+      "removeItem": "Usuń pozycję",
+      "selectDevice": "Wybierz Urządzenie...",
+      "stopBuild": "Zatrzymaj budowę",
+      "targetOptions": "Opcje...",
+      "translate": "Tłumaczenie..."
+    }
+  }
+}

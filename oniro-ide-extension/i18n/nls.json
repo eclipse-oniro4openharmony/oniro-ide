@@ -1,0 +1,20 @@
+{
+  "oniro": {
+    "projectMenu": {
+      "batchBuild": "Batch build...",
+      "buildTargets": "Build Targets",
+      "cleanTargets": "Clean Targets",
+      "closeProject": "Close Project",
+      "newMultiProjectWorkspace": "New Multi-Project Workspace...",
+      "newProject": "New Project",
+      "openProject": "Open Project",
+      "project": "Project",
+      "rebuildTargets": "Rebuild all target files",
+      "removeItem": "Remove Item",
+      "selectDevice": "Select Device...",
+      "stopBuild": "Stop build",
+      "targetOptions": "Options...",
+      "translate": "Translate..."
+    }
+  }
+}

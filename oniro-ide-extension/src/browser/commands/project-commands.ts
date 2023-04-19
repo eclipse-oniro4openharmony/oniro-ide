@@ -11,7 +11,7 @@ export const NEW_PROJECT_COMMAND = Command.toLocalizedCommand({
 
 export const NEW_MULTI_WORKSPACE_COMMAND = Command.toLocalizedCommand({
     id: 'oniro.new-multi-project-workspace',
-    label: 'new Multi-Project Worksapce...',
+    label: 'New Multi-Project Workspace...',
     category: PROJECT_CATEGORY
 }, 'oniro/projectMenu/newMultiProjectWorkspace');
 

@@ -8,7 +8,7 @@ import { BUILD_TARGET_COMMAND, CLEAN_TARGETS_COMMAND, TARGET_OPTIONS_COMMAND, RE
 export class ProjectMenuContribution implements MenuContribution {
     registerMenus(menus: MenuModelRegistry): void {
         const subMenuPath = [...MAIN_MENU_BAR, 'project'];
-        menus.registerSubmenu(subMenuPath, nls.localizeByDefault('Project'), {
+        menus.registerSubmenu(subMenuPath, nls.localize('oniro/projectMenu/project', 'Project'), {
             order: '4'
         });
         // basic project actions

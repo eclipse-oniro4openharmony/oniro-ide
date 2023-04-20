@@ -5,7 +5,8 @@
   ],
   "version": "0.0.0",
   "dependencies": {
-    "@theia/core": "1.35.0"
+    "@theia/core": "1.35.0",
+    "@theia/filesystem": "1.35.0"
   },
   "devDependencies": {
   },

@@ -1,5 +1,8 @@
 import { Command, CommandContribution, CommandRegistry } from "@theia/core";
-import { injectable } from "@theia/core/shared/inversify";
+import { inject, injectable } from "@theia/core/shared/inversify";
+import { NewProjectConfig, ProjectCreationService } from "../services/project-creation-service";
+import { NewProjectWizardFactory } from "../wizards/new-project/new-project-wizard";
+import { WizardDialog } from "../wizards/wizard-dialog";
 
 const PROJECT_CATEGORY = 'Project';
 const PROJECT_CATEGORY_KEY = 'oniro/projectMenu/project';
@@ -97,9 +100,21 @@ export const TARGET_OPTIONS_COMMAND = Command.toLocalizedCommand({
 
 @injectable()
 export class ProjectCommandContribution implements CommandContribution {
+
+    @inject(NewProjectWizardFactory)
+    private newProjectWizardFactory: () => WizardDialog<NewProjectConfig>;
+
+    @inject(ProjectCreationService)
+    private projectCreationService: ProjectCreationService;
+
     registerCommands(commands: CommandRegistry): void {
         // general project commands
-        commands.registerCommand(NEW_PROJECT_COMMAND, {execute: () => {}});
+        commands.registerCommand(NEW_PROJECT_COMMAND, {execute: async () => {
+            const projectConfig = await this.newProjectWizardFactory().open();
+            if(projectConfig) {
+                this.projectCreationService.createProject(projectConfig);
+            }
+        }});
         commands.registerCommand(NEW_MULTI_WORKSPACE_COMMAND, {execute: () => {}});
         commands.registerCommand(OPEN_PROJECT_COMMAND, {execute: () => {}});
         commands.registerCommand(CLOSE_PROJECT_COMMAND, {execute: () => {}});

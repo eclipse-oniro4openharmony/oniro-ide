@@ -1,0 +1,18 @@
+.location-chooser-panel {
+    display: flex;
+}
+
+.project-location-field {
+    flex-grow: 1;
+}
+
+.chip-tree {
+    width: 200px;
+    height: 200px;
+    border: 1px solid gray;
+    margin-right: 20px;
+}
+
+.chip-description {
+    white-space: pre;
+}

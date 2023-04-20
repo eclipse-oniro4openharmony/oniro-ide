@@ -9,12 +9,12 @@ import { OniroToolbarCommands } from './manager/oniro-toolbar-commands';
 
 export const bindOniroToolbarContribution = (bind: interfaces.Bind, rebind: interfaces.Rebind) => {
     bind(OniroToolbarSideContribution).toSelf().inSingletonScope();
-    bind(ToolbarContribution).to(OniroToolbarSideContribution);
-    bind(CommandContribution).to(OniroToolbarSideContribution);
-    bind(MenuContribution).to(OniroToolbarSideContribution);
+    bind(ToolbarContribution).toService(OniroToolbarSideContribution);
+    bind(CommandContribution).toService(OniroToolbarSideContribution);
+    bind(MenuContribution).toService(OniroToolbarSideContribution);
     bind(OniroToolbarManagerContribution).toSelf().inSingletonScope();
-    bind(CommandContribution).to(OniroToolbarManagerContribution);
+    bind(CommandContribution).toService(OniroToolbarManagerContribution);
     bind(OniroToolbarCommands).toSelf().inSingletonScope();
-    bind(CommandContribution).to(OniroToolbarCommands);
+    bind(CommandContribution).toService(OniroToolbarCommands);
     rebind(ToolbarDefaultsFactory).toConstantValue(OniroToolbarDefaults);
 };

@@ -1,4 +1,4 @@
-import { CommandContribution, CommandRegistry, MenuModelRegistry, MenuPath } from '@theia/core';
+import { Command, CommandContribution, CommandRegistry, MenuContribution, MenuModelRegistry, MenuPath, nls } from '@theia/core';
 import { inject, injectable } from '@theia/core/shared/inversify';
 import * as React from '@theia/core/shared/react';
 import { WorkspaceService } from '@theia/workspace/lib/browser';
@@ -6,25 +6,28 @@ import { AbstractToolbarContribution } from '@theia/toolbar/lib/browser/abstract
 import { ReactInteraction } from '@theia/toolbar/lib/browser/toolbar-constants';
 import '../../../../src/browser/toolbar/layout/oniro-toolbar-side-contribution.css';
 
-export const PLACE_TOOLBAR_LEFT = {
+const ToolbarCategory = 'Toolbar';
+const ToolbarCategoryKey = 'oniro/toolbar/category';
+
+export const PLACE_TOOLBAR_LEFT = Command.toLocalizedCommand({
     id: 'place.toolbar.left',
-    category: 'ToolbarLayout',
+    category: ToolbarCategory,
     label: 'Place toolbar left'
-};
-export const PLACE_TOOLBAR_RIGHT = {
+}, 'oniro/toolbar/placeLeft', ToolbarCategoryKey);
+export const PLACE_TOOLBAR_RIGHT = Command.toLocalizedCommand({
     id: 'place.toolbar.right',
-    category: 'ToolbarLayout',
+    category: ToolbarCategory,
     label: 'Place toolbar right'
-};
-export const PLACE_TOOLBAR_TOP = {
+}, 'oniro/toolbar/placeRight', ToolbarCategoryKey);
+export const PLACE_TOOLBAR_TOP = Command.toLocalizedCommand({
     id: 'place.toolbar.top',
-    category: 'ToolbarLayout',
+    category: ToolbarCategory,
     label: 'Place toolbar top'
-};
+}, 'oniro/toolbar/placeTop', ToolbarCategoryKey);
 export const ONIRO_TOOLBAR_SIDE_CONTEXT_MENU: MenuPath = ['toolbar:toolbarSideContextMenu'];
 
 @injectable()
-export class OniroToolbarSideContribution extends AbstractToolbarContribution implements CommandContribution {
+export class OniroToolbarSideContribution extends AbstractToolbarContribution implements CommandContribution, MenuContribution {
     @inject(WorkspaceService) protected readonly workspaceService: WorkspaceService;
 
     static ID = 'oniro-toolbar-side-contribution';
@@ -53,7 +56,7 @@ export class OniroToolbarSideContribution extends AbstractToolbarContribution im
                 className='icon-wrapper action-label item enabled codicon codicon-layout-activitybar-right'
                 id='toolbar-side-icon'
                 onClick={this.handleOnClick}
-                title='Place toolbar to side or top'
+                title={nls.localize('oniro/toolbar/placeTitle', 'Place toolbar to side or top')}
             >
             </div>);
     }

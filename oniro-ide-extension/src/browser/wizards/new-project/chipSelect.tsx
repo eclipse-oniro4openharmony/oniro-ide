@@ -8,7 +8,7 @@ import { WizardPage } from "../wizard-dialog";
 
 interface ChipNode extends SelectableTreeNode {
     description: string
-} 
+}
 
 @injectable()
 export class ChipTree extends TreeImpl {
@@ -20,9 +20,9 @@ export class ChipTree extends TreeImpl {
     init() {
         // TODO get chips from a service for currently supported ones
         const root = {
-            id: 'root', 
-            parent: undefined, 
-            name: 'chips', 
+            id: 'root',
+            parent: undefined,
+            name: 'chips',
             children: [],
             expanded: true
         } as ExpandableTreeNode
@@ -34,7 +34,7 @@ export class ChipTree extends TreeImpl {
             children: [],
             expanded: false
         } as ExpandableTreeNode;
-        const stm ={
+        const stm = {
             id: 'STMicroelectronics',
             parent: this._root,
             name: 'STMicroelectronics',
@@ -73,7 +73,7 @@ export class ChipTree extends TreeImpl {
 @injectable()
 export class ChipTreeWidget extends TreeWidget {
     protected requestUpdateEmitter = new Emitter<void>();
-    public onRequestUpdate = this.requestUpdateEmitter.event; 
+    onRequestUpdate = this.requestUpdateEmitter.event;
 
 
     reactRender(): React.ReactNode {
@@ -107,18 +107,18 @@ export class ChipSelectStep extends WizardPage<NewProjectConfig> {
     @postConstruct()
     init() {
         this.chipTree.onRequestUpdate(() => this.requestUpdateEmitter.fire());
-        this.treeModel.onSelectionChanged((nodes) => {this.configObject.chip = this.treeModel.selectedNodes[0].id})
+        this.treeModel.onSelectionChanged((nodes) => { this.configObject.chip = this.treeModel.selectedNodes[0].id })
     }
 
     render(configObject: NewProjectConfig): React.ReactNode {
         this.configObject = configObject;
-        return <div style={{display: 'flex'}}>
+        return <div style={{ display: 'flex' }}>
             <div className="chip-tree">{this.chipTree.reactRender()}</div>
             <div className="chip-description">{this.treeModel.selectedNodes[0]?.description}</div>
         </div>
     }
 
     isValid(configObject: NewProjectConfig): DialogError {
-        return configObject.chip ? true : nls.localize('oniro/newProjectWizard/noChipSelectedMessage', 'please select a chip');
+        return configObject.chip ? true : nls.localize('oniro/newProjectWizard/noChipSelectedMessage', 'Please select a chip');
     }
 }

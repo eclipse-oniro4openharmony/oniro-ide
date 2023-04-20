@@ -1,24 +1,27 @@
 import { AbstractDialog, DialogError, DialogMode } from "@theia/core/lib/browser";
 import React = require("react");
-import {createRoot, Root} from 'react-dom/client'
+import { createRoot, Root } from 'react-dom/client'
 import { Message } from '@theia/core/lib/browser/widgets/widget';
 import { Disposable } from "@theia/core/shared/vscode-languageserver-protocol";
 import { Emitter, MaybePromise, nls } from "@theia/core";
 import { inject, injectable, multiInject } from "@theia/core/shared/inversify";
 
-export const wizardPages = Symbol('wizard-pages');
+import '../../src/browser/wizards/styles/wizard.css';
+import '../../src/browser/wizards/styles/new-project-wizard.css';
+
+export const WizardPages = Symbol('WizardPages');
 @injectable()
-export abstract class WizardPage<T> {    
+export abstract class WizardPage<T> {
     readonly title: string;
 
     protected requestUpdateEmitter = new Emitter<void>();
-    public onRequestUpdate = this.requestUpdateEmitter.event; 
+    public onRequestUpdate = this.requestUpdateEmitter.event;
 
     abstract render(configObject: T): React.ReactNode;
     abstract isValid(configObject: T): MaybePromise<DialogError>;
 }
 
-export const wizardDialogProps = Symbol('wizard-dialog-props');
+export const WizardDialogProps = Symbol('WizardDialogProps');
 export interface WizardDialogProps<T> {
     configObject: T;
     title: string;
@@ -40,10 +43,10 @@ export class WizardDialog<T> extends AbstractDialog<T> {
     private valid: boolean;
 
     constructor(
-        @inject(wizardDialogProps) private wizardProps: WizardDialogProps<T>,
-        @multiInject(wizardPages) private steps: WizardPage<T>[]
+        @inject(WizardDialogProps) private wizardProps: WizardDialogProps<T>,
+        @multiInject(WizardPages) private steps: WizardPage<T>[]
     ) {
-        super({title: wizardProps.title});
+        super({ title: wizardProps.title });
         this.value = wizardProps.configObject;
         steps.forEach(step => step.onRequestUpdate(() => this.update()))
         this.init();
@@ -58,12 +61,12 @@ export class WizardDialog<T> extends AbstractDialog<T> {
         this.toDispose.push(Disposable.create(() => this.stepRoot.unmount()));
 
         this.currentStep = this.steps[0];
-        
-        this.backButton = this.createButton(nls.localize('oniro/wizards/back', 'back'));
+
+        this.backButton = this.createButton(nls.localize('oniro/wizards/back', 'Back'));
         this.backButton.onclick = () => this.previousStep();
         this.backButton.disabled = true;
         this.controlPanel.appendChild(this.backButton);
-        this.nextButton = this.createButton(nls.localize('oniro/wizards/next', 'next'));
+        this.nextButton = this.createButton(nls.localize('oniro/wizards/next', 'Next'));
         this.nextButton.onclick = () => this.nextStep();
         this.controlPanel.appendChild(this.nextButton);
     }
@@ -71,15 +74,15 @@ export class WizardDialog<T> extends AbstractDialog<T> {
     protected override onUpdateRequest(msg: Message): void {
         super.onUpdateRequest(msg);
         this.stepRoot.render(<React.Fragment>
-            { this.currentStep.title && <div className="wizard-page-title">{this.currentStep.title}</div>}
+            {this.currentStep.title && <div className="wizard-page-title">{this.currentStep.title}</div>}
             {this.currentStep.render(this.value)}
-            </React.Fragment>);
+        </React.Fragment>);
         this.backButton.disabled = this.steps.indexOf(this.currentStep) === 0;
     }
 
     protected async isValid(value: T, mode: DialogMode): Promise<DialogError> {
         const valid = await this.currentStep.isValid(value);
-        switch(typeof valid) {
+        switch (typeof valid) {
             case 'string': this.valid = valid ? false : true; break;
             case 'object': this.valid = valid.result; break;
             case 'boolean': this.valid = valid; break;
@@ -90,24 +93,24 @@ export class WizardDialog<T> extends AbstractDialog<T> {
 
     private nextStep() {
         let currentIndex = this.steps.indexOf(this.currentStep);
-        if(currentIndex === this.steps.length - 1) {
+        if (currentIndex === this.steps.length - 1) {
             this.resolve!(this.value);
             this.close();
         } else {
             this.currentStep = this.steps[++currentIndex]
             this.update();
-            if(currentIndex === this.steps.length - 1) {
-                this.nextButton.innerText = nls.localize('oniro/wizards/finish', 'finish');
+            if (currentIndex === this.steps.length - 1) {
+                this.nextButton.innerText = nls.localize('oniro/wizards/finish', 'Finish');
             }
         }
     }
 
     private previousStep() {
         let currentIndex = this.steps.indexOf(this.currentStep);
-        if(currentIndex === this.steps.length - 1) {
-            this.nextButton.innerText = this.wizardProps.finishButtonText ?? nls.localize('oniro/wizards/next', 'next');
+        if (currentIndex === this.steps.length - 1) {
+            this.nextButton.innerText = this.wizardProps.finishButtonText ?? nls.localize('oniro/wizards/next', 'Next');
         }
-        if(currentIndex != 0) {
+        if (currentIndex != 0) {
             this.backButton.disabled = false;
             this.currentStep = this.steps[--currentIndex]
             this.update()

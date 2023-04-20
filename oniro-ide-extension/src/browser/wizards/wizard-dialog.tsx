@@ -65,6 +65,7 @@ export class WizardDialog<T> extends AbstractDialog<T> {
         this.backButton = this.createButton(nls.localize('oniro/wizards/back', 'Back'));
         this.backButton.onclick = () => this.previousStep();
         this.backButton.disabled = true;
+        this.backButton.classList.add('secondary');
         this.controlPanel.appendChild(this.backButton);
         this.nextButton = this.createButton(nls.localize('oniro/wizards/next', 'Next'));
         this.nextButton.onclick = () => this.nextStep();

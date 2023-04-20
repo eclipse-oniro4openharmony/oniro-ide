@@ -6,8 +6,8 @@ import { Disposable } from "@theia/core/shared/vscode-languageserver-protocol";
 import { Emitter, MaybePromise, nls } from "@theia/core";
 import { inject, injectable, multiInject } from "@theia/core/shared/inversify";
 
-import '../../src/browser/wizards/styles/wizard.css';
-import '../../src/browser/wizards/styles/new-project-wizard.css';
+import '../../../src/browser/wizards/styles/wizard.css';
+import '../../../src/browser/wizards/styles/new-project-wizard.css';
 
 export const WizardPages = Symbol('WizardPages');
 @injectable()

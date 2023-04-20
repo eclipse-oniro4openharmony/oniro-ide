@@ -59,6 +59,11 @@
     "rebuild": "theia rebuild:browser --cacheRoot ../.."
   },
   "theia": {
-    "target": "browser"
+    "target": "browser",
+    "config": {
+      "preferences": {
+        "toolbar.showToolbar": true
+      }
+    }
   }
 }

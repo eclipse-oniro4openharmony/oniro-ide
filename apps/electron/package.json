@@ -60,6 +60,11 @@
     "rebuild": "theia rebuild:electron --cacheRoot ../.."
   },
   "theia": {
-    "target": "electron"
+    "target": "electron",
+    "config": {
+      "preferences": {
+        "toolbar.showToolbar": true
+      }
+    }
   }
 }

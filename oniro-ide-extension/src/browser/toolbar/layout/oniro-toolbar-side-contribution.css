@@ -1,0 +1,29 @@
+#oniro-toolbar-side-contribution {
+    position: relative;
+}
+
+#oniro-toolbar-side-contribution .icon-wrapper {
+    cursor: pointer;
+    margin-left: 0;
+}
+
+#oniro-toolbar-side-contribution:focus,
+#oniro-toolbar-side-contribution .icon-wrapper:focus,
+#oniro-toolbar-side-contribution .codicon-search:focus {
+    outline: none;
+}
+
+#oniro-toolbar-side-contribution  .icon-wrapper.action-label.item.enabled:hover {
+    background-color: var(--theia-toolbar-hoverBackground);
+}
+
+#oniro-toolbar-side-contribution #easy-search-item-icon.codicon-search {
+    position: relative;
+}
+
+#oniro-toolbar-side-contribution .icon-wrapper .codicon-triangle-down {
+    position: absolute;
+    font-size: 10px;
+    bottom: -7px;
+    right: -2px;
+}

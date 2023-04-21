@@ -60,9 +60,13 @@
   },
   "theia": {
     "target": "electron",
-    "config": {
-      "preferences": {
-        "toolbar.showToolbar": true
+    "frontend": {
+      "config": {
+        "applicationName": "Oniro IDE",
+        "defaultTheme": "oniro-dark",
+        "preferences": {
+          "toolbar.showToolbar": true
+        }
       }
     }
   }

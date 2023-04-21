@@ -59,11 +59,14 @@
   },
   "theia": {
     "target": "browser",
-    "config": {
-      "preferences": {
-        "toolbar.showToolbar": true
-      },
-      "defaultTheme": "oniro-theme"
+    "frontend": {
+      "config": {
+        "applicationName": "Oniro IDE",
+        "defaultTheme": "oniro-dark",
+        "preferences": {
+          "toolbar.showToolbar": true
+        }
+      }
     }
   }
 }

@@ -12,6 +12,8 @@ import { createFileTreeContainer } from '@theia/filesystem/lib/browser';
 import { FileNavigatorTree } from '@theia/navigator/lib/browser/navigator-tree';
 import { ProjectSelectFileNavigatorWidget } from './views/project-select-file-navigator';
 import { FILE_NAVIGATOR_PROPS } from '@theia/navigator/lib/browser/navigator-container'
+import { OniroThemeContribution } from './theme/oniro-theme';
+import { FrontendApplicationContribution } from '@theia/core/lib/browser';
 
 export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Unbind, isBound: interfaces.IsBound, rebind: interfaces.Rebind) => {
 
@@ -33,4 +35,6 @@ export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Un
             props: FILE_NAVIGATOR_PROPS,
         }).get(ProjectSelectFileNavigatorWidget)
     })
+
+    bind(FrontendApplicationContribution).to(OniroThemeContribution).inSingletonScope();
 });

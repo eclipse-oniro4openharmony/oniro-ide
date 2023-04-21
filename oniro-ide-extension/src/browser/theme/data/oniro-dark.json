@@ -1,0 +1,11 @@
+{
+    "$schema": "vscode://schemas/color-theme",
+	"name": "Oniro Dark",
+    "include": "./dark_plus.json",
+	"colors": {
+		"editor.background": "#101010",
+		"editor.foreground": "#dddddd",
+		"activityBarBadge.background": "#007acc",
+		"sideBarTitle.foreground": "#bbbbbb"
+	}
+}

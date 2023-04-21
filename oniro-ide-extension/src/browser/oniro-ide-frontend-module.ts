@@ -12,6 +12,10 @@ import { createFileTreeContainer } from '@theia/filesystem/lib/browser';
 import { FileNavigatorTree } from '@theia/navigator/lib/browser/navigator-tree';
 import { ProjectSelectFileNavigatorWidget } from './views/project-select-file-navigator';
 import { FILE_NAVIGATOR_PROPS } from '@theia/navigator/lib/browser/navigator-container'
+import { SearchInWorkspaceFrontendContribution } from "@theia/search-in-workspace/lib/browser/search-in-workspace-frontend-contribution"
+import { DebugFrontendApplicationContribution } from "@theia/debug/lib/browser/debug-frontend-application-contribution"
+import { RightDebugFrontendApplicationContribution, RightSearchInWorkspaceFrontendContribution } from './repositioned-views';
+
 
 export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Unbind, isBound: interfaces.IsBound, rebind: interfaces.Rebind) => {
 
@@ -23,6 +27,9 @@ export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Un
 
     bind(ProjectCreationService).toSelf().inSingletonScope();
     bind(NewProjectWizardFactory).toFactory(ctx => () => createNewProjectWizardContainer(ctx.container).get(WizardDialog<NewProjectConfig>));
+
+    rebind(SearchInWorkspaceFrontendContribution).to(RightSearchInWorkspaceFrontendContribution);
+    rebind(DebugFrontendApplicationContribution).to(RightDebugFrontendApplicationContribution);
 
     rebind(FileNavigatorWidget).toDynamicValue(ctx => {
         return createFileTreeContainer(ctx.container, {

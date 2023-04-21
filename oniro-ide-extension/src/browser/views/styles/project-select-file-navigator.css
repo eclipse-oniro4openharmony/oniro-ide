@@ -1,0 +1,4 @@
+.file-navigator-select {
+    width: calc(100% - 20px);
+    margin: 10px;
+}

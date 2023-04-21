@@ -7,6 +7,11 @@ import { LocalizationMenuContribution } from './menus/localization-menu';
 import { NewProjectWizardFactory, createNewProjectWizardContainer } from './wizards/new-project/new-project-wizard';
 import { WizardDialog } from './wizards/wizard-dialog';
 import { NewProjectConfig, ProjectCreationService } from './services/project-creation-service';
+import { FileNavigatorModel, FileNavigatorWidget, NavigatorDecoratorService } from '@theia/navigator/lib/browser';
+import { createFileTreeContainer } from '@theia/filesystem/lib/browser';
+import { FileNavigatorTree } from '@theia/navigator/lib/browser/navigator-tree';
+import { ProjectSelectFileNavigatorWidget } from './views/project-select-file-navigator';
+import { FILE_NAVIGATOR_PROPS } from '@theia/navigator/lib/browser/navigator-container'
 
 export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Unbind, isBound: interfaces.IsBound, rebind: interfaces.Rebind) => {
 
@@ -18,4 +23,14 @@ export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Un
 
     bind(ProjectCreationService).toSelf().inSingletonScope();
     bind(NewProjectWizardFactory).toFactory(ctx => () => createNewProjectWizardContainer(ctx.container).get(WizardDialog<NewProjectConfig>));
+
+    rebind(FileNavigatorWidget).toDynamicValue(ctx => {
+        return createFileTreeContainer(ctx.container, {
+            tree: FileNavigatorTree,
+            model: FileNavigatorModel,
+            widget: ProjectSelectFileNavigatorWidget,
+            decoratorService: NavigatorDecoratorService,
+            props: FILE_NAVIGATOR_PROPS,
+        }).get(ProjectSelectFileNavigatorWidget)
+    })
 });

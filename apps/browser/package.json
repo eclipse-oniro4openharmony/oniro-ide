@@ -50,6 +50,7 @@
     "@theia/cli": "1.35.0"
   },
   "scripts": {
+    "compile": "lerna run build --scope=oniro-ide-extension && yarn build",
     "build": "theia build --mode development",
     "start": "yarn rebuild && theia start --plugins=local-dir:../../plugins",
     "watch": "concurrently -c blue,yellow -n tsc,webpack \"yarn watch:compile\" \"yarn watch:bundle\"",

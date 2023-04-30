@@ -52,6 +52,7 @@
     "electron": "^15.3.5"
   },
   "scripts": {
+    "compile": "lerna run build --scope=oniro-ide-extension && yarn build",
     "build": "theia build --mode development",
     "start": "yarn rebuild && theia start --plugins=local-dir:../../plugins",
     "watch:compile": "lerna run watch --scope=oniro-ide-extension",

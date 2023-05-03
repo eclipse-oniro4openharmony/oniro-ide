@@ -48,7 +48,8 @@
     "oniro-ide-extension": "0.0.0"
   },
   "devDependencies": {
-    "@theia/cli": "1.37.0"
+    "@theia/cli": "1.37.0",
+    "electron": "^23.2.4"
   },
   "scripts": {
     "compile": "lerna run build --scope=oniro-ide-extension && yarn build",

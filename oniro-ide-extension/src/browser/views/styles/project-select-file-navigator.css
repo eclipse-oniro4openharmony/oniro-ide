@@ -2,3 +2,8 @@
     width: calc(100% - 20px);
     margin: 10px;
 }
+
+#files .theia-TreeContainer {
+    /* The height needs to be aligned with the size of the project/hardware selection */
+    height: calc(100% - 80px);
+}

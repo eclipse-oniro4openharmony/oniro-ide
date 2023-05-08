@@ -1,4 +1,3 @@
-const {exec} = require('child_process');
 
 module.exports = {
     packagerConfig: {
@@ -23,7 +22,6 @@ module.exports = {
     ],
     hooks: {
         prePackage: async () => {
-            const { exec } = require('child_process');
             console.log('Build Electron App');
             await asyncExec('yarn build');    
         },
@@ -53,6 +51,7 @@ module.exports = {
     }
 }
 
+const {exec} = require('child_process');
 async function asyncExec(command, options) {
     return new Promise((resolve, reject) => {
         exec(command, options, (err) => err ? reject(err) : resolve('success'));    

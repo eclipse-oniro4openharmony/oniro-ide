@@ -1,6 +1,8 @@
 {
   "private": true,
   "name": "oniro-ide-electron",
+  "author": "Typefox",
+  "description": "Huawei Oniro IDE",
   "version": "0.0.0",
   "main": "src-gen/frontend/electron-main.js",
   "dependencies": {

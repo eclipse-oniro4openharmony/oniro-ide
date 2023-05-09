@@ -28,7 +28,7 @@ module.exports = {
         postPackage: async (_, platform) => {
             const fs = require('fs-extra');
             for(outputPath of platform.outputPaths) {
-                const appOutPath = `${outputPath}/${process.platform === 'darwin' ? 'Content/Resources' : 'resources'}/app`;
+                const appOutPath = `${outputPath}/${process.platform === 'darwin' ? 'oniro-ide-electron.app/Contents/Resources' : 'resources'}/app`;
                 const packageJsonPath = `${appOutPath}/package.json`;
 
                 console.log('Modifying Bundle package.json')
@@ -45,6 +45,9 @@ module.exports = {
                 await asyncExec(`yarn --cwd ${appOutPath} rebuild`);
 
                 console.log('Copy Plugins');
+                if(!fs.existsSync('../../plugins')) {
+                    await asyncExec('yarn --cwd ../../ download:plugins');
+                }                
                 fs.copySync('../../plugins', appOutPath + '/plugins');
             }
         }

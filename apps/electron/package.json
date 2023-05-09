@@ -64,7 +64,7 @@
   "scripts": {
     "compile": "lerna run build --scope=oniro-ide-extension && yarn build",
     "build": "theia build --mode development",
-    "start": "electron-forge start",
+    "start": "yarn rebuild && theia start --plugins=local-dir:../../plugins",
     "watch:compile": "lerna run watch --scope=oniro-ide-extension",
     "watch:bundle": "theia build --watch --mode development",
     "rebuild": "theia rebuild:electron --cacheRoot ../..",

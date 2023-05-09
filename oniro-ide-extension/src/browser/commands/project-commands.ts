@@ -4,11 +4,11 @@ import { NewProjectConfig, ProjectCreationService } from "../services/project-cr
 import { NewProjectWizardFactory } from "../wizards/new-project/new-project-wizard";
 import { WizardDialog } from "../wizards/wizard-dialog";
 
-const PROJECT_CATEGORY = 'Project';
+export const PROJECT_CATEGORY = 'Project';
 const PROJECT_CATEGORY_KEY = 'oniro/projectMenu/project';
-const BUILD_CATEGORY = 'Compile';
+export const BUILD_CATEGORY = 'Compile';
 const BUILD_CATEGORY_KEY = 'oniro/projectMenu/build';
-const CONFIG_CATEGORY = 'Configuration';
+export const CONFIG_CATEGORY = 'Configuration';
 const CONFIG_CATEGORY_KEY = 'oniro/projectMenu/config';
 // project commands
 export const NEW_PROJECT_COMMAND = Command.toLocalizedCommand({

@@ -14,10 +14,10 @@ It's important to note that if the VSCode extension that implements the command 
 
 **Example:**
 To try a simple example one can install the notification-sample-vsix into the Oniro theia instance with the `Extensions: Install from VSIX...` command. 
-The vsix can be found here: /huawei-ide/example-assets/notifications-sample-0.0.1.vsix 
-and is generated from https://github.com/microsoft/vscode-extension-samples/tree/main/notifications-sample.
+The vsix can be found [here](./example-assets/notifications-sample-0.0.1.vsix)
+and is generated from [VSCode notification sample](https://github.com/microsoft/vscode-extension-samples/tree/main/notifications-sample).
 
 Every command registered in this extension is callable in theia simply by its id.  
-This is implemented in /oniro-ide-extension/src/browser/toolbar/manager/oniro-toolbar-commands.ts.
+This is implemented in [oniro-toolbar-commands.ts](./oniro-ide-extension/src/browser/toolbar/manager/oniro-toolbar-commands.ts#L25).
 There the example-command is registered and executes the 'notifications-sample.showInfo' command from the VSCode extension.
 Furthermore one can see in the same file how it is added to the toolbar manager: the command needs to be added to the array which is returned by the method getOniroCommands().

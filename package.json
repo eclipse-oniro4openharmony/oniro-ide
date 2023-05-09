@@ -31,7 +31,9 @@
     "EditorConfig.EditorConfig": "https://open-vsx.org/api/EditorConfig/EditorConfig/0.14.4/file/EditorConfig.EditorConfig-0.14.4.vsix",
     "dbaeumer.vscode-eslint": "https://open-vsx.org/api/dbaeumer/vscode-eslint/2.1.20/file/dbaeumer.vscode-eslint-2.1.20.vsix",
     "llvm-vs-code-extensions.vscode-clangd": "https://open-vsx.org/api/llvm-vs-code-extensions/vscode-clangd/0.1.23/file/llvm-vs-code-extensions.vscode-clangd-0.1.23.vsix",
-    "eclipse-cdt.cdt-gdb-vscode": "https://open-vsx.org/api/eclipse-cdt/cdt-gdb-vscode/0.0.96/file/eclipse-cdt.cdt-gdb-vscode-0.0.96.vsix"
+    "eclipse-cdt.cdt-gdb-vscode": "https://open-vsx.org/api/eclipse-cdt/cdt-gdb-vscode/0.0.96/file/eclipse-cdt.cdt-gdb-vscode-0.0.96.vsix",
+    "rust-analyzer": "https://open-vsx.org/api/rust-lang/rust-analyzer/${targetPlatform}/0.4.1473/file/rust-lang.rust-analyzer-0.4.1473@${targetPlatform}.vsix",
+    "CodeLLDB": "https://open-vsx.org/api/vadimcn/vscode-lldb/1.9.0/file/vadimcn.vscode-lldb-1.9.0.vsix"
   },
   "theiaPluginsExcludeIds": [
     "ms-vscode.js-debug-companion",

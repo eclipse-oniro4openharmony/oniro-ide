@@ -3,6 +3,22 @@
 ### Design documentation
 #### Customising the Toolbar
 --
+## Requirement 2: Multiplatform Desktop IDE and Web IDE
+### Design documentation
+#### Desktop Application Build
+The Theia desktop application is realized through electron. For the Oniro IDE [electron-forge](https://www.electronforge.io/) is used for building the different distributables.
+To install all dependencies required by electron forge first execute `yarn` in the root directory.
+execute `yarn electron make` to package the application and build the distributables. 
+execute `yarn electron package` for just creating the package without building the distributables. 
+The packaging step can take a while. 
+After building the package and distributables, they can be found at `apps/electron/out`. The `oniro-ide-electron-{your platform}` folder contains the package while the `make` folder contains the distributables   
+
+Currently included electron-forge makers for creating distributables from the package are the following:
+- **maker-zip** (*System Independ*): Will just create a simple zip file containing the electron package
+- **maker-squirrel** (*Windows*): creates a [squirrel executable](https://github.com/Squirrel/Squirrel.Windows) for installing on Windows
+- **maker-dmg** (*macOS*): creates a dmg file for installing on macOS
+- **maker-deb** (*linux*): creates a deb file for installing on debian based linux distributions
+Further configuration and disabling or adding of makers can be done in the apps/electron/forge.config.js file 
 
 ## Requirement 4: VS Code API usage & Theia extension - VS Code extension communication
 ### Design documentation

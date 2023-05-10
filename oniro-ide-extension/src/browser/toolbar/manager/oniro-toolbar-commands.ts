@@ -24,6 +24,17 @@ export class OniroToolbarCommands implements CommandContribution {
             // https://github.com/microsoft/vscode-extension-samples/tree/main/notifications-sample
             execute: () => registry.executeCommand('notifications-sample.showInfo').catch((e: Error) => console.error(e.message))
         });
+        
+        // a second custom command with a custom icon.
+        const anotherExampleCommand: Command = {
+            id: 'another-example-command',
+            label: 'Another Example Command',
+            iconClass: 'heart-icon',
+            category: 'Example'
+        };
+        registry.registerCommand(anotherExampleCommand, {
+            execute: () => registry.executeCommand('notifications-sample.showInfoAsModal').catch((e: Error) => console.error(e.message))
+        });
     }
     
     getOniroCommands(): Command[] {
@@ -51,6 +62,9 @@ export class OniroToolbarCommands implements CommandContribution {
         // Add the example command from above to the toolbar
         const exampleCommand = this.commandRegistry.getCommand('example-command');
         exampleCommand && otherCommands.push(exampleCommand);
+        // Add the other example command from above to the toolbar
+        const anotherExampleCommand = this.commandRegistry.getCommand('another-example-command');
+        anotherExampleCommand && otherCommands.push(anotherExampleCommand);
 
         return [...projectCommands, ...fileCommands, ...compileCommands, ...debugCommands, ...otherCommands];
     }

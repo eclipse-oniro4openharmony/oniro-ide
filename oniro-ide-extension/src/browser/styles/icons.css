@@ -1,0 +1,5 @@
+.heart-icon {
+    -webkit-mask: url('../icons/heart.svg');
+    mask: url('../icons/heart.svg');
+    background-color: var(--theia-foreground);
+}

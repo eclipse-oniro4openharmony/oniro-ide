@@ -10,7 +10,8 @@ The Theia desktop application is realized through electron. For the Oniro IDE [e
 To install all dependencies required by electron forge first execute `yarn` in the root directory.
 execute `yarn electron make` to package the application and build the distributables. 
 execute `yarn electron package` for just creating the package without building the distributables. 
-The packaging step can take a while.
+The packaging step can take a while. 
+After building the Package and distributables, they can be found at `apps/electron/out`. The `oniro-ide-electron-{your platform}` folder contains the package while the `make` folder contains the distributables   
 
 Currently included electron-forge makers for creating distributables from the package are the following:
 - **maker-zip** (*System Independ*): Will just create a simple zip file containing the electron package

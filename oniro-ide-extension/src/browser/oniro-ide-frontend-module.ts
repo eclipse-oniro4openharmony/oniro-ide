@@ -1,3 +1,4 @@
+import '../../src/browser/styles/index.css';
 import { CommandContribution, MenuContribution } from '@theia/core/lib/common';
 import { ProjectMenuContribution } from './menus/project-menu';
 import { ProjectCommandContribution } from './commands/project-commands';

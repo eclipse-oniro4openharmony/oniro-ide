@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1
 
 ARG NODE_VERSION=16.20.0
-FROM node:${NODE_VERSION}-alpine
-RUN apk add --no-cache make pkgconfig gcc g++ python3 libx11-dev libxkbfile-dev libsecret-dev gcompat curl
+FROM --platform=linux/amd64 node:${NODE_VERSION}-alpine
+RUN apk add --no-cache make pkgconfig gcc g++ python3 libx11-dev libxkbfile-dev libsecret-dev curl
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 RUN export PATH="$HOME/.cargo/env:$PATH"
 WORKDIR /home/theia

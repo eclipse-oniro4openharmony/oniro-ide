@@ -3,13 +3,16 @@ import { inject, injectable } from '@theia/core/shared/inversify';
 import { CommonCommands } from '@theia/core/lib/browser/common-frontend-contribution';
 import { EditorCommands } from '@theia/editor/lib/browser';
 import { WorkspaceCommands } from '@theia/workspace/lib/browser/workspace-commands';
-import { BUILD_CATEGORY, PROJECT_CATEGORY } from '../../commands/project-commands';
+import { ProjectService } from '../../services/project-service';
 
 @injectable()
 export class OniroToolbarCommands implements CommandContribution {
     @inject(CommandRegistry) commandRegistry: CommandRegistry;
+
+    @inject(ProjectService) projectService: ProjectService;
     
     registerCommands(registry: CommandRegistry): void {
+
         // define a command...
         const exampleCommand: Command = {
             id: 'example-command',
@@ -37,12 +40,11 @@ export class OniroToolbarCommands implements CommandContribution {
         });
     }
     
-    getOniroCommands(): Command[] {
+    async getOniroCommands(): Promise<Command[]> {
         const commands = Array.from(this.commandRegistry.getAllCommands());
         
         // Filter by category and filter out commands that don't have an icon nor a label
-        const compileCommands = commands.filter(cmd => !!cmd.iconClass && !!cmd.label && cmd.category === BUILD_CATEGORY);
-        const projectCommands = commands.filter(cmd => !!cmd.iconClass && !!cmd.label && cmd.category === PROJECT_CATEGORY);
+        // TODO: update to use path of active project in workspace and update commands when another project is selected
         const debugCommands = commands.filter(cmd => !!cmd.iconClass && !!cmd.label && cmd.category === 'Debug');
         
         // Pick out the single commands that we want to add to the toolbar, add an icon and a category
@@ -66,6 +68,6 @@ export class OniroToolbarCommands implements CommandContribution {
         const anotherExampleCommand = this.commandRegistry.getCommand('another-example-command');
         anotherExampleCommand && otherCommands.push(anotherExampleCommand);
 
-        return [...projectCommands, ...fileCommands, ...compileCommands, ...debugCommands, ...otherCommands];
+        return [...this.projectService.getProjectTaskCommands(), ...fileCommands, ...debugCommands, ...otherCommands];
     }
 }

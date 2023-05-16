@@ -20,7 +20,7 @@ export class OniroToolbarManagerContribution implements CommandContribution {
         registry.registerCommand(ToolbarCommands.ADD_COMMAND_TO_TOOLBAR, {
             execute: async () => {
                 const selectedCommands = new Set(this.toolbarController.toolbarItems.items.left.map(item => item.map(i => i.id)).flat());
-                this.oniroToolbarManagerDialog = new OniroToolbarManagerDialog(selectedCommands, this.oniroCommands.getOniroCommands());
+                this.oniroToolbarManagerDialog = new OniroToolbarManagerDialog(selectedCommands, await this.oniroCommands.getOniroCommands());
                 const selectedCommandIds = await this.oniroToolbarManagerDialog.open();
                 if(selectedCommandIds) {
                     const selectedCommands = Array.from(selectedCommandIds).map(cmdId => this.commandRegistry.getCommand(cmdId)).filter(cmd => !!cmd) as Command[];

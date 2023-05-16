@@ -39,7 +39,7 @@ module.exports = {
                 fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
                 console.log('Install Dependencies');
-                await asyncExec(`yarn -s --cwd ${appOutPath}`, {stdio: 'inherit'});
+                await asyncExec(`yarn --cwd ${appOutPath} install`, {stdio: 'inherit'});
 
                 console.log('Rebuild Native Dependencies');
                 await asyncExec(`yarn --cwd ${appOutPath} rebuild`);

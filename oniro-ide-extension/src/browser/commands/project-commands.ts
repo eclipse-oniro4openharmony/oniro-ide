@@ -6,8 +6,13 @@ import { WizardDialog } from "../wizards/wizard-dialog";
 
 export const PROJECT_CATEGORY = 'Project';
 const PROJECT_CATEGORY_KEY = 'oniro/projectMenu/project';
+
+export const PROJECT_TASKS_CATEGORY = 'Project Tasks';
+export const PROJECT_TASKS_CATEGORY_KEY = 'oniro/projectMenu/project';
+
 export const BUILD_CATEGORY = 'Compile';
 const BUILD_CATEGORY_KEY = 'oniro/projectMenu/build';
+
 export const CONFIG_CATEGORY = 'Configuration';
 const CONFIG_CATEGORY_KEY = 'oniro/projectMenu/config';
 // project commands

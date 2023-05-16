@@ -14,7 +14,9 @@ import { FileNavigatorTree } from '@theia/navigator/lib/browser/navigator-tree';
 import { ProjectSelectFileNavigatorWidget } from './views/project-select-file-navigator';
 import { FILE_NAVIGATOR_PROPS } from '@theia/navigator/lib/browser/navigator-container'
 import { OniroThemeContribution } from './theme/oniro-theme';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser';
+import { FrontendApplicationContribution, WebSocketConnectionProvider } from '@theia/core/lib/browser';
+import { OniroServer, servicePath } from '../common/oniro-protocol';
+import { ProjectService } from './services/project-service';
 
 export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Unbind, isBound: interfaces.IsBound, rebind: interfaces.Rebind) => {
 
@@ -38,4 +40,10 @@ export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Un
     })
 
     bind(FrontendApplicationContribution).to(OniroThemeContribution).inSingletonScope();
+
+    bind(OniroServer).toDynamicValue(ctx => {
+        const connection = ctx.container.get(WebSocketConnectionProvider);
+        return connection.createProxy<OniroServer>(servicePath);
+    });
+    bind(ProjectService).toSelf().inSingletonScope();
 });

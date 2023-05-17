@@ -1,3 +1,4 @@
+import '../../src/browser/styles/index.css';
 import { CommandContribution, MenuContribution } from '@theia/core/lib/common';
 import { ProjectMenuContribution } from './menus/project-menu';
 import { ProjectCommandContribution } from './commands/project-commands';
@@ -15,7 +16,10 @@ import { FILE_NAVIGATOR_PROPS } from '@theia/navigator/lib/browser/navigator-con
 import { SearchInWorkspaceFrontendContribution } from "@theia/search-in-workspace/lib/browser/search-in-workspace-frontend-contribution"
 import { DebugFrontendApplicationContribution } from "@theia/debug/lib/browser/debug-frontend-application-contribution"
 import { RightDebugFrontendApplicationContribution, RightSearchInWorkspaceFrontendContribution } from './repositioned-views';
-
+import { OniroThemeContribution } from './theme/oniro-theme';
+import { FrontendApplicationContribution, WebSocketConnectionProvider } from '@theia/core/lib/browser';
+import { OniroServer, servicePath } from '../common/oniro-protocol';
+import { ProjectService } from './services/project-service';
 
 export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Unbind, isBound: interfaces.IsBound, rebind: interfaces.Rebind) => {
 
@@ -40,4 +44,12 @@ export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Un
             props: FILE_NAVIGATOR_PROPS,
         }).get(ProjectSelectFileNavigatorWidget)
     })
+
+    bind(FrontendApplicationContribution).to(OniroThemeContribution).inSingletonScope();
+
+    bind(OniroServer).toDynamicValue(ctx => {
+        const connection = ctx.container.get(WebSocketConnectionProvider);
+        return connection.createProxy<OniroServer>(servicePath);
+    });
+    bind(ProjectService).toSelf().inSingletonScope();
 });

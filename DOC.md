@@ -1,0 +1,61 @@
+# Documentation
+## Requirement 1: Definition of the user interface and flow improvements
+### Design documentation
+#### **Customising the Toolbar**
+In [oniro-toolbar-commands.ts](https://github.com/TypeFox/huawei-ide/blob/c9a7bde939186dd645c1d93633d761a522936d4b/oniro-ide-extension/src/browser/toolbar/manager/oniro-toolbar-commands.ts#L40) commands are registered and/or added to the toolbar manager.  
+All commands returned by `getOniroCommands()` are shown in the toolbar manager UI.  
+
+#### **Adding or changing command icons**
+The icons that are shown in the toolbar are set on the respective commands. To add or change the icon of a command the iconClass field needs to be set to a css class of one of the following kinds:
+1. Use codicon  
+You can find the list of codicons here: https://microsoft.github.io/vscode-codicons/dist/codicon.html  
+Codicon class names follow this syntax: "codicon codicon-\<*name of the icon*\>"  
+Or you can just use the following helper method `codicon('some-codicon-class-name')`. See the [new-project-wizard.tsx](https://github.com/TypeFox/huawei-ide/blob/main/oniro-ide-extension/src/browser/wizards/new-project/new-project-wizard.tsx#L42) as an example.
+
+2. Use fontawesome  
+Theia uses the version 4.7.
+You can find the list of font awesome icons here: https://fontawesome.com/v4/icons/  
+Fontawesome class names follow this syntax: "fa fa-\<*name of the icon*\>"
+
+3. Create your own icons and create a css class with a attribute mask  
+It is also possible to use custom icons.  
+To achieve that you need to create a css class where you set a mask with a reference to your icon svg or png and set a background-color. See [here](https://github.com/TypeFox/huawei-ide/blob/main/oniro-ide-extension/src/browser/styles/icons.css) for an example.  
+Make sure the respective css file is imported [here](https://github.com/TypeFox/huawei-ide/blob/main/oniro-ide-extension/src/browser/styles/index.css).  
+You can use that class to set the iconClass field of a command. 
+
+See in [oniro-toolbar-commands.ts](https://github.com/TypeFox/huawei-ide/blob/c9a7bde939186dd645c1d93633d761a522936d4b/oniro-ide-extension/src/browser/toolbar/manager/oniro-toolbar-commands.ts#L29) how iconClasses are set.
+
+## Requirement 2: Multiplatform Desktop IDE and Web IDE
+### Design documentation
+#### **Desktop Application Build**
+The Theia desktop application is realized through electron. For the Oniro IDE [electron-forge](https://www.electronforge.io/) is used for building the different distributables.
+To install all dependencies required by electron forge first execute `yarn` in the root directory.
+execute `yarn electron make` to package the application and build the distributables. 
+execute `yarn electron package` for just creating the package without building the distributables. 
+The packaging step can take a while. 
+After building the package and distributables, they can be found at `apps/electron/out`. The `oniro-ide-electron-{your platform}` folder contains the package while the `make` folder contains the distributables   
+
+Currently included electron-forge makers for creating distributables from the package are the following:
+- **maker-zip** (*System Independ*): Will just create a simple zip file containing the electron package
+- **maker-squirrel** (*Windows*): creates a [squirrel executable](https://github.com/Squirrel/Squirrel.Windows) for installing on Windows
+- **maker-dmg** (*macOS*): creates a dmg file for installing on macOS
+- **maker-deb** (*linux*): creates a deb file for installing on debian based linux distributions
+Further configuration and disabling or adding of makers can be done in the apps/electron/forge.config.js file 
+
+## Requirement 4: VS Code API usage & Theia extension - VS Code extension communication
+### Design documentation
+#### **Communication between theia and VScodeExtension**
+To enable communication between Eclipse Theia and VSCode extensions, Theia's `CommandRegistry` can be used. It allows extensions to register and invoke commands. All commands defined in a VSCode Extension are registered in the `CommandRegistry` after the extension has been loaded. 
+To invoke such a command implemented by a VSCode extension, Eclipse Theia extensions can use the executeCommand method in the command registry which looks like this: `executeCommand<T>(commandId: string, ...args: any[]): Promise<T | undefined>`. 
+
+It's important to note that if the VSCode extension that implements the command is not installed, or if the command ID is incorrect, an error will be thrown. Therefore, it's good practice to catch and handle these errors.
+
+**Example:**
+To try a simple example one can install the notification-sample-vsix into the Oniro theia instance with the `Extensions: Install from VSIX...` command. 
+The vsix can be found [here](./example-assets/notifications-sample-0.0.1.vsix)
+and is generated from [VSCode notification sample](https://github.com/microsoft/vscode-extension-samples/tree/main/notifications-sample).
+
+Every command registered in this extension is callable in theia simply by its id.  
+This is implemented in [oniro-toolbar-commands.ts](./oniro-ide-extension/src/browser/toolbar/manager/oniro-toolbar-commands.ts#L25).
+There the example-command is registered and executes the 'notifications-sample.showInfo' command from the VSCode extension.
+Furthermore one can see in the same file how it is added to the toolbar manager: the command needs to be added to the array which is returned by the method getOniroCommands().

@@ -7,6 +7,6 @@ WORKDIR /home/theia
 COPY . .
 RUN yarn && \
     yarn download:plugins && \
-    yarn browser build
+    yarn browser compile
 EXPOSE 3000
 ENTRYPOINT [ "yarn", "browser", "start", "--hostname=0.0.0.0" ]

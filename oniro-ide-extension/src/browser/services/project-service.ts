@@ -45,10 +45,16 @@ export class ProjectService {
             const command = this.projectTaskToCommand(task);
             this.commandRegistry.unregisterCommand(command);
             this.commandRegistry.registerCommand(command, {
-                execute: () => this.commandRegistry.executeCommand('DevEco.runTask', {name: task.id, projectPath: this.workspaceService.tryGetRoots()[0].resource.path.toString().substring(1)})
+                execute: () => {
+                    let projectPath = this.workspaceService.tryGetRoots()[0].resource.path.fsPath();
+                    if(projectPath.match(/^[A-Z]:\\.*/)) { // path starts with uppercase windows drive letter  
+                        projectPath =projectPath.charAt(0).toLowerCase() + projectPath.slice(1);
+                    }
+                    this.commandRegistry.executeCommand('DevEco.runTask', {name: task.id, projectPath});
+                }
             });
             this.activeProjectTaskCommands.push(command);
-        }); 
+        });
     }
 
     private projectTaskToCommand(task: ProjectTask): Command {

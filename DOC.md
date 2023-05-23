@@ -42,6 +42,49 @@ Currently included electron-forge makers for creating distributables from the pa
 - **maker-deb** (*linux*): creates a deb file for installing on debian based linux distributions
 Further configuration and disabling or adding of makers can be done in the apps/electron/forge.config.js file 
 
+#### **Creating custom Dialogs and Wizards**
+Creating a custom dialog in a Theia-Extension is relativly simple. We'll use the `wizard-dialog.tsx` as an Example here.
+```Typescript
+@injectable()
+export class WizardDialog extends AbstractDialog {
+    ...
+}
+```
+Firstly of course we need a class for our Dialog. This class should either extend `AbstractDialog` or `ReactDialog`.
+latter just gives us a `render` method in which we can write jsx/tsx code directly, while the Abstract Dialog just exposes the `node`, `titleNode` and `contentNode` HTMLElements which we can modify through the default javascript API.
+
+With that we can allready use our new Dialog by just instantiating and calling the open method like `new WizardDialog(...).open()`.
+
+But since we want our dialog to be able to interact with other parts of theia, or our own services, we need dependency injection.
+For this, first we have to annotate our class with `@injectable()`. Next we have to bind it inside of our container which is located in `oniro-ide-frontend-module.ts`. Since our dialog is probably statefull, we want to create a new instance each time we open it. To archieve that we create a factory instead of binding it as a singleton or constant value:
+```Typescript
+bind(NewProjectWizardFactory)
+    .toFactory(ctx => () => createNewProjectWizardContainer(ctx.container).get(WizardDialog<NewProjectConfig>));
+```
+In this factory we create a child container in which we bind our dialog to itself and retrieve it afterwards to let it be returned by the factory.
+```Typescript
+export function createNewProjectWizardContainer(parent: interfaces.Container): interfaces.Container {
+    const child = parent.createChild();
+    child.bind(WizardDialogProps).toConstantValue({ title: nls.localize('oniro/newProjectWizard/title', 'Create New Project'), configObject: {} });
+    child.bind(WizardDialog<NewProjectConfig>).toSelf();
+    return child;
+}
+```
+This allows us to use `@inject(...)` inside of our dialog class. Also we can bind other constant values like configuration objects or similiar which could also be parameters of the factory method and then be injected into our dialog.
+
+To open our dialog we now inject the factory into wherever its needed like for example a `CommandContribution` 
+```Typescript
+@inject(NewProjectWizardFactory)
+private newProjectWizardFactory: () => WizardDialog<NewProjectConfig>;
+...
+registerCommands(commands: CommandRegistry): void {
+    commands.registerCommand(NEW_PROJECT_COMMAND, {execute: async () => {
+        this.newProjectWizardFactory().open();
+    }});
+}
+
+``` 
+
 ## Requirement 4: VS Code API usage & Theia extension - VS Code extension communication
 ### Design documentation
 #### **Communication between theia and VScodeExtension**

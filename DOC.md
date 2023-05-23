@@ -25,6 +25,59 @@ You can use that class to set the iconClass field of a command.
 
 See in [oniro-toolbar-commands.ts](https://github.com/TypeFox/huawei-ide/blob/c9a7bde939186dd645c1d93633d761a522936d4b/oniro-ide-extension/src/browser/toolbar/manager/oniro-toolbar-commands.ts#L29) how iconClasses are set.
 
+#### Creating custom Dialogs and Wizards
+
+Creating a custom dialog in a Theia-Extension is relatively simple. We'll use the `wizard-dialog.tsx` as an example here:
+
+```Typescript
+@injectable()
+export class WizardDialog extends AbstractDialog {
+    ...
+}
+```
+
+First, we need a class for our Dialog. This class should either extend `AbstractDialog` or `ReactDialog`.
+The latter just gives us a `render` method in which we can write jsx/tsx code directly, while the former just exposes the `node`, `titleNode` and `contentNode` HTMLElements which we can modify through the browser javascript API.
+
+With that we can already use our new Dialog by just instantiating and calling the open method like `new WizardDialog(...).open()`.
+
+But since we want our dialog to be able to interact with other parts of theia, or our own services, we need dependency injection.
+For this, first we have to annotate our class with `@injectable()`. Next we have to bind it inside of our container which is located in `oniro-ide-frontend-module.ts`. Since our dialog is probably stateful, we want to create a new instance each time we open it. To achieve that, we create a factory instead of binding it as a singleton or constant value:
+
+```Typescript
+bind(NewProjectWizardFactory)
+    .toFactory(ctx => () => createNewProjectWizardContainer(ctx.container).get(WizardDialog<NewProjectConfig>));
+```
+
+In this factory we create a child container in which we bind our dialog to itself and retrieve it afterwards to let it be returned by the factory.
+
+```ts
+export function createNewProjectWizardContainer(parent: interfaces.Container): interfaces.Container {
+    const child = parent.createChild();
+    child.bind(WizardDialogProps).toConstantValue({ title: nls.localize('oniro/newProjectWizard/title', 'Create New Project'), configObject: {} });
+    child.bind(WizardDialog<NewProjectConfig>).toSelf();
+    return child;
+}
+```
+
+This allows us to use `@inject(...)` inside of our dialog class. Also we can bind other constant values like configuration objects or similiar which could also be parameters of the factory method and then be injected into our dialog.
+
+To open our dialog we now inject the factory into wherever its needed like for example a `CommandContribution`:
+
+```ts
+class WizardCommands implements CommandContribution {
+
+    @inject(NewProjectWizardFactory)
+    private newProjectWizardFactory: () => WizardDialog<NewProjectConfig>;
+
+    registerCommands(commands: CommandRegistry): void {
+        commands.registerCommand(NEW_PROJECT_COMMAND, {execute: async () => {
+            this.newProjectWizardFactory().open();
+        }});
+    }
+}
+``` 
+
 ## Requirement 2: Multiplatform Desktop IDE and Web IDE
 ### Design documentation
 #### **Desktop Application Build**

@@ -22,6 +22,12 @@ export const OniroToolbarDefaults: () => DeflatedToolbarTree = () => ({
                     command: FILE_NAVIGATOR_TOGGLE_COMMAND_ID,
                     tooltip: 'Explorer',
                     icon: 'codicon codicon-files'
+                },
+                {
+                    id: 'debug:toggle',
+                    command: 'debug:toggle',
+                    tooltip: 'Debug',
+                    icon: 'codicon codicon-debug'
                 }
             ],
             [

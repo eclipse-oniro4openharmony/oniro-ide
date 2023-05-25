@@ -7,12 +7,9 @@ import { ProgressService } from '@theia/core';
 import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
 import { ProgressBarFactory } from '@theia/core/lib/browser/progress-bar-factory';
 import { Deferred } from '@theia/core/lib/common/promise-util';
-import {
-    ToolbarItem,
-    ToolbarAlignment,
-    ToolbarItemPosition,
-} from '@theia/toolbar/lib/browser/toolbar-interfaces';
+import {ToolbarItem, ToolbarItemPosition} from '@theia/toolbar/lib/browser/toolbar-interfaces';
 import { OniroVerticalToolbarController } from './oniro-vertical-toolbar-controller';
+import { movableDefaultItems } from './oniro-toolbar-defaults';
 
 export const TOOLBAR_PROGRESSBAR_ID = 'main-toolbar-progress';
 @injectable()
@@ -50,8 +47,7 @@ export class OniroVerticalToolbarImpl extends TabBarToolbar {
 
     protected updateInlineItems(): void {
         this.inline.clear();
-        const { items } = this.model.toolbarItems;
-        const group = items.right[0];
+        const group = movableDefaultItems as ToolbarItem[]
         const contextKeys = new Set<string>();
         for (const item of group) {
             this.inline.set(item.id, item);
@@ -102,7 +98,7 @@ export class OniroVerticalToolbarImpl extends TabBarToolbar {
         this.deferredRef.resolve(element);
     }
     protected override render(): React.ReactNode {
-        const rightGroup = this.model.toolbarItems?.items[ToolbarAlignment.RIGHT][0];
+        const rightGroup = movableDefaultItems;
         return (
             <>
                 {this.renderGroup(rightGroup)}

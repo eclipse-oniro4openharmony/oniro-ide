@@ -26,7 +26,7 @@ export const bindOniroToolbarContribution = (bind: interfaces.Bind, rebind: inte
     bind(CommandContribution).toService(OniroToolbarManagerContribution);
     bind(OniroToolbarCommands).toSelf().inSingletonScope();
     bind(CommandContribution).toService(OniroToolbarCommands);
-    rebind(ToolbarDefaultsFactory).toConstantValue(OniroToolbarDefaults);
+    rebind(ToolbarDefaultsFactory).toFactory(OniroToolbarDefaults);
     bind(OniroIconService).toSelf().inSingletonScope();
 
     bind(OniroApplicationShellToolbarOverride).toSelf().inSingletonScope();

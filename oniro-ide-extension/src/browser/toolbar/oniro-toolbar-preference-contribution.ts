@@ -7,10 +7,11 @@ export const OniroToolbarPreferencesSchema: PreferenceSchema = {
     type: 'object',
     properties: {
         [ONIRO_TOOLBAR_SIDE_ID]: {
-            'type': 'string',
-            'description': 'Toolbar side',
-            'default': 'top',
-            'scope': PreferenceScope.Workspace,
+            type: 'string',
+            enum: ['top', 'left', 'right'],
+            description: 'Toolbar side',
+            default: 'top',
+            scope: PreferenceScope.Workspace,
         },
     },
 };

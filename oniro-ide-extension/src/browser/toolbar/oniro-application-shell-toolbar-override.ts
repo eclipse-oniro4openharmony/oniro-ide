@@ -4,11 +4,14 @@ import { inject, injectable, postConstruct } from '@theia/core/shared/inversify'
 import { BoxPanel, Layout, SplitPanel } from '@theia/core/lib/browser';
 import { OniroVerticalToolbar, OniroVerticalToolbarFactory } from './oniro-toolbar-interfaces';
 import { ONIRO_TOOLBAR_SIDE_ID, OniroToolbarPreferences } from './oniro-toolbar-preference-contribution';
+import { ToolbarController } from '@theia/toolbar/lib/browser/toolbar-controller';
+import { movableDefaultItems } from './oniro-toolbar-defaults';
 
 @injectable()
 export class OniroApplicationShellToolbarOverride extends ApplicationShellWithToolbarOverride {
     @inject(OniroToolbarPreferences) protected oniroToolbarPreferences: OniroToolbarPreferences;
     @inject(OniroVerticalToolbarFactory) protected readonly verticalToolbarFactory: () => OniroVerticalToolbar;
+    @inject(ToolbarController) protected toolbarController: ToolbarController;
 
     protected leftToolbar: OniroVerticalToolbar;
     protected rightToolbar: OniroVerticalToolbar;
@@ -38,9 +41,11 @@ export class OniroApplicationShellToolbarOverride extends ApplicationShellWithTo
     protected tryShowVerticalToolbar(): boolean {
         const toolbarSide = this.oniroToolbarPreferences[ONIRO_TOOLBAR_SIDE_ID];
         const isShellMaximized = this.mainPanel.hasClass(MAXIMIZED_CLASS) || this.bottomPanel.hasClass(MAXIMIZED_CLASS);
+        this.updateMainToolbarItems(toolbarSide);
         if (toolbarSide === 'left' && !isShellMaximized) {
             this.leftToolbar.show();
             this.rightToolbar.hide();
+            
             return true;
         } else if (toolbarSide === 'right' && !isShellMaximized) {
             this.rightToolbar.show();
@@ -50,6 +55,24 @@ export class OniroApplicationShellToolbarOverride extends ApplicationShellWithTo
         this.leftToolbar.hide();
         this.rightToolbar.hide();
         return false;
+    }
+
+    protected async updateMainToolbarItems(toolbarSide: string) {
+        if(this.toolbarController.toolbarItems) {
+            const toolbarItems = this.toolbarController.toolbarItems;
+            await this.toolbarController.clearAll();
+            if (toolbarSide === 'top') {
+                if(toolbarItems.items.right.length > 1) {
+                    toolbarItems.items.right[0].push(...movableDefaultItems)
+                } else {
+                    toolbarItems.items.right.splice(0, 0, movableDefaultItems)
+                }
+            } else if(toolbarItems.items.right.length > 1) {
+                toolbarItems.items.right[0] = [];
+            }
+            this.toolbarController.toolbarItems = toolbarItems; // notifiy toolbar about changed items
+            await this.toolbarController.openOrCreateJSONFile();
+        }
     }
 
     protected override createLayout(): Layout {

@@ -112,3 +112,39 @@ Every command registered in this extension is callable in theia simply by its id
 This is implemented in [oniro-toolbar-commands.ts](./oniro-ide-extension/src/browser/toolbar/manager/oniro-toolbar-commands.ts#L25).
 There the example-command is registered and executes the 'notifications-sample.showInfo' command from the VSCode extension.
 Furthermore one can see in the same file how it is added to the toolbar manager: the command needs to be added to the array which is returned by the method getOniroCommands().
+
+#### **prebundle DevEco Extension with oniro-ide**
+**plugins**
+The plugins should be prebundled with the Oniro-IDE. For that they will be needed in the `/plugins` folder.
+The easiest way to do that is probably to set-up a central server from which they can be dowloaded via HTTP (for example a private (openVSx instance)[https://open-vsx.org/]).
+
+After that the urls can be added to the `theiaPlugins` object inside the main `package.json` file. After that they will automaticly be downloaded by the `download:plugins` script.
+```json
+  "theiaPlugins": {
+    //...
+    "deveco-device-tool": "https://{your private openVSX instance or other file server}/deveco-device-tool-3.1.500.vsix"
+    //... {repeat for the other 3 plugins as well}
+  },
+```
+**Installing Deveco Device tool backend**
+The reason we can't implement this right now is, that we don't have download locations that do not require user interaction to accept terms and conditions. So this is just a concept on how bundling this could be accomplished. 
+Docker: It should be relativly simple to modify the Dockerfile so it downloads and installs the backend inside the container. important would be that the Venv/Scripts folder is inside the `Path` environment-variable or that the `DEVECO_PENV_DIR` environment variable is set to the install location so that the plugins can find the backend binaries.
+
+Electron: best way would probably be to bundle it with the rest of the application. The `postPackage` hook in `apps/electron/forge.config` could be used to copy the backend in to `out/oniro-ide-elecrton-{system}/resources`.
+That way the installer would just unpack it together with the electron app itself.
+
+The plugins of course would need to know the install location of the backend. So we would have to add a `BackendContribution` like this and bind it in the container in `onire-ide-backend-module.ts`.
+```Typescript
+export class DevEcoDeviceToolBackendContribution implements BackendApplicationContribution {
+    initialize(): void {
+        if(environment.electron.is() && this.checkDeviceToolInstallationValid()) {
+            process.env.DEVECO_PENV_DIR = '{dir to Install location}' // probably something like  `${proces.cwd()}../DevEco-Device-Tool/core/deveco-venv`
+        }
+    }
+
+    checkDeviceToolInstallationValid(): boolean {
+        ...
+    }
+} 
+```
+This would set `DEVECO_PENV_DIR` envionment variable right at the startup of theia before any plugins are loaded so that this variable would then be known to them on startup

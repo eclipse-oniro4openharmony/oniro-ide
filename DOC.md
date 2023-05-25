@@ -80,7 +80,7 @@ class WizardCommands implements CommandContribution {
 
 ## Requirement 2: Multiplatform Desktop IDE and Web IDE
 ### Design documentation
-#### **Desktop Application Build**
+#### Desktop Application Build
 The Theia desktop application is realized through electron. For the Oniro IDE [electron-forge](https://www.electronforge.io/) is used for building the different distributables.
 To install all dependencies required by electron forge first execute `yarn` in the root directory.
 execute `yarn electron make` to package the application and build the distributables. 
@@ -94,6 +94,32 @@ Currently included electron-forge makers for creating distributables from the pa
 - **maker-dmg** (*macOS*): creates a dmg file for installing on macOS
 - **maker-deb** (*linux*): creates a deb file for installing on debian based linux distributions
 Further configuration and disabling or adding of makers can be done in the apps/electron/forge.config.js file 
+
+#### Cloud Deployment
+
+##### Docker Image
+
+The `Dockerfile` in the source of the repository contains build instructions for a docker image that contains the browser version of the Oniro IDE.
+
+It is based on Ubuntu and installs all vscode extensions and native dependencies (compilers and other toolchains) during build time.
+
+##### Workspace Management
+
+Just the Docker image isn't enough to build a cloud deployment for a Theia application. Cloud IDEs (Theia/VSCode) require some sort of **workspace management solution**.
+The workspace management is in charge of deploying new workspaces on the fly when needed. A common example workflow might look like this:
+
+1. A user initiates to open a repository from GitHub
+2. `git clone` is executed for the specific repository on a remote service
+3. A kubernetes operator starts a new pod with the IDE inside
+4. The git repository gets mounted into the pod as a volume
+5. The user is redirected to the newly started IDE pod and loads the cloned repository
+
+None of features are part of Theia itself and need to be controlled by the surrounding infrastructure of the cloud deployment.
+There are a few workspace management solutions available (open source) that are able to handle Theia. Most notably:
+
+1. [Eclipse Theia-Cloud](https://theia-cloud.io/)
+2. [Eclipse Che](https://www.eclipse.org/che/)
+
 
 ## Requirement 4: VS Code API usage & Theia extension - VS Code extension communication
 ### Design documentation

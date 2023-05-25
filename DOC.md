@@ -115,11 +115,13 @@ The workspace management is in charge of deploying new workspaces on the fly whe
 5. The user is redirected to the newly started IDE pod and loads the cloned repository
 
 None of features are part of Theia itself and need to be controlled by the surrounding infrastructure of the cloud deployment.
-There are a few workspace management solutions available (open source) that are able to handle Theia. Most notably:
+There are a few workspace management solutions available, however, only [Eclipse Theia-Cloud](https://theia-cloud.io/) actually has builtin support for Theia apps.
+Other solutions such as [Eclipse Che](https://www.eclipse.org/che/) or [Gitpod](https://www.gitpod.io/) have dropped support for Theia in the recent years and switched to VSCode instead.
 
-1. [Eclipse Theia-Cloud](https://theia-cloud.io/)
-2. [Eclipse Che](https://www.eclipse.org/che/)
-
+Theia-Cloud works using a simple [Kubernetes Operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/).
+The operator can deploy new instances of Theia apps using vanilla Kubernetes.
+This means it can be used in any environment with Kubernetes support, such as Google Cloud or AWS.
+Theia-Cloud spawns new pods on demand using a simple HTTP-Request system. That allows it to integrate into existing automation infrastructure.
 
 ## Requirement 4: VS Code API usage & Theia extension - VS Code extension communication
 ### Design documentation

@@ -1,6 +1,5 @@
 import { DeflatedToolbarTree, ToolbarAlignment } from '@theia/toolbar/lib/browser/toolbar-interfaces';
 import { OniroToolbarSideContribution } from './layout/oniro-toolbar-side-contribution';
-import { GettingStartedCommand } from '@theia/getting-started/lib/browser/getting-started-contribution';
 import { FILE_NAVIGATOR_TOGGLE_COMMAND_ID } from '@theia/navigator/lib/browser/navigator-contribution';
 import { interfaces } from '@theia/core/shared/inversify';
 import { OniroToolbarPreferences, ONIRO_TOOLBAR_SIDE_ID } from './oniro-toolbar-preference-contribution';
@@ -26,9 +25,9 @@ export const OniroToolbarDefaults: (ctx: interfaces.Context) => () => DeflatedTo
 // items that are allways there and can "move" to the sidetoolbar
 export const movableDefaultItems = [
     {
-        id: GettingStartedCommand.id,
-        command: GettingStartedCommand.id,
-        tooltip: 'Getting Started',
+        id: 'DevEco.showHome',
+        command: 'DevEco.showHome',
+        tooltip: 'Home',
         icon: 'codicon codicon-home',
     },
     {

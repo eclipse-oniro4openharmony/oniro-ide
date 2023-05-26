@@ -5,6 +5,9 @@ import { OniroLocalizationContribution } from './i18n/oniro-localization-contrib
 import { ConnectionHandler, JsonRpcConnectionHandler } from '@theia/core';
 import { OniroClient, OniroServer, servicePath } from '../common/oniro-protocol';
 import { ProjectTasksProvider } from './project-tasks-provider';
+import { BackendApplicationContribution } from "@theia/core/lib/node";
+import { DeviceToolBackendContribution } from './device-tool-backend-contribution';
+
 
 export default new ContainerModule(bind => {
     bind(LocalizationContribution).to(OniroLocalizationContribution).inSingletonScope();
@@ -17,4 +20,7 @@ export default new ContainerModule(bind => {
             oniroServer.setClient(client);
             return oniroServer;
         })).inSingletonScope();
+
+    bind(DeviceToolBackendContribution).toSelf().inSingletonScope();
+    bind(BackendApplicationContribution).toService(DeviceToolBackendContribution);
 });

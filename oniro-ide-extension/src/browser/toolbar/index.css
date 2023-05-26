@@ -1,0 +1,18 @@
+#theia-left-content-panel.theia-mod-collapsed, #theia-right-content-panel.theia-mod-collapsed {
+  max-width: 1px;
+}
+
+.p-vertical-toolbar {
+  --theia-toolbar-width: calc(var(--theia-private-menubar-height) - 2px);
+  --theia-toolbar-item-padding: 5px;
+  --theia-toolbar-icon-size: 20px;
+  max-width: var(--theia-toolbar-width);
+  color: var(--theia-mainToolbar-foreground);
+  background: var(--theia-mainToolbar-background);
+  padding: 2px 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  position: relative;
+}
+

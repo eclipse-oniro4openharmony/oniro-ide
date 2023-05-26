@@ -5,6 +5,8 @@ import { WorkspaceService } from '@theia/workspace/lib/browser';
 import { AbstractToolbarContribution } from '@theia/toolbar/lib/browser/abstract-toolbar-contribution';
 import { ReactInteraction } from '@theia/toolbar/lib/browser/toolbar-constants';
 import '../../../../src/browser/toolbar/layout/oniro-toolbar-side-contribution.css';
+import { PreferenceService } from '@theia/core/lib/browser';
+import { ONIRO_TOOLBAR_SIDE_ID } from '../oniro-toolbar-preference-contribution';
 
 const ToolbarCategory = 'Toolbar';
 const ToolbarCategoryKey = 'oniro/toolbar/category';
@@ -29,6 +31,7 @@ export const ONIRO_TOOLBAR_SIDE_CONTEXT_MENU: MenuPath = ['toolbar:toolbarSideCo
 @injectable()
 export class OniroToolbarSideContribution extends AbstractToolbarContribution implements CommandContribution, MenuContribution {
     @inject(WorkspaceService) protected readonly workspaceService: WorkspaceService;
+    @inject(PreferenceService) protected readonly preferenceService: PreferenceService;
 
     static ID = 'oniro-toolbar-side-contribution';
     id = OniroToolbarSideContribution.ID;
@@ -64,17 +67,17 @@ export class OniroToolbarSideContribution extends AbstractToolbarContribution im
     registerCommands(registry: CommandRegistry): void {
         registry.registerCommand(PLACE_TOOLBAR_LEFT, {
             execute: async () => {
-                alert('Place toolbar to left');
+                this.preferenceService.set(ONIRO_TOOLBAR_SIDE_ID, 'left')
             },
         });
         registry.registerCommand(PLACE_TOOLBAR_RIGHT, {
             execute: async () => {
-                alert('Place toolbar to right');
+                this.preferenceService.set(ONIRO_TOOLBAR_SIDE_ID, 'right')
             },
         });
         registry.registerCommand(PLACE_TOOLBAR_TOP, {
             execute: async () => {
-                alert('Place toolbar to top');
+                this.preferenceService.set(ONIRO_TOOLBAR_SIDE_ID, 'top')
             },
         });
     }

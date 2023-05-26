@@ -22,5 +22,5 @@ export default new ContainerModule(bind => {
         })).inSingletonScope();
 
     bind(DeviceToolBackendContribution).toSelf().inSingletonScope();
-    bind(BackendApplicationContribution).to(DeviceToolBackendContribution);
+    bind(BackendApplicationContribution).toService(DeviceToolBackendContribution);
 });

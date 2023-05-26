@@ -1,15 +1,15 @@
-import { URI } from "@theia/core";
+import { isWindows, URI } from "@theia/core";
 import { injectable } from "@theia/core/shared/inversify";
 import { OniroClient, OniroServer, ProjectTask } from "../common/oniro-protocol";
-import { exec } from 'child_process'
+import { execFile } from 'child_process'
+import { sep } from 'path'
 
 @injectable()
 export class ProjectTasksProvider implements OniroServer {
-    // private client?: OniroClient;
 
     async getProjectTasks(projectPath: URI): Promise<ProjectTask[]> {
         return new Promise((res, reject) => {
-            exec('hos project tasks', {cwd: projectPath.path.toString().substring(1)}, (err, stdout, errout) => {
+            execFile(this.getHosLocation() ?? 'hos', ['project', 'tasks'], {cwd: projectPath.path.toString().substring(1)}, (err, stdout, errout) => {
                 if(err) {
                     reject(err);
                 }
@@ -17,6 +17,15 @@ export class ProjectTasksProvider implements OniroServer {
                 res(projectTasks[0].items.filter((task: any) => task.name && task.icon));
             });
         });
+    }
+
+    private getHosLocation(): string | undefined {
+        if(!process.env.DEVECO_PENV_DIR) {
+            return undefined
+        }
+
+        const binPath = isWindows ? 'Scripts' : 'bin'; 
+        return `${process.env.DEVECO_PENV_DIR + sep + binPath + sep}hos`
     }
 
 

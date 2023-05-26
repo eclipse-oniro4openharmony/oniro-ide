@@ -3,6 +3,7 @@ import { BackendApplicationContribution } from "@theia/core/lib/node";
 import { injectable } from "@theia/core/shared/inversify";
 import * as fs from 'fs-extra'
 import * as path from 'path'
+import { homedir } from 'os'
 
 const windowsSearchPaths: readonly string[] = [
     'C:/Program Files/Huawei'
@@ -10,7 +11,7 @@ const windowsSearchPaths: readonly string[] = [
 
 const unixSearchPaths: readonly string[] = [
     // TODO find default install path for linux
-    '/bin/huawei'
+    `${homedir()}/Huawei/`
 ];
 
 const defaultElectronDir = `${process.cwd()}/../DevEco-Device-Tool/core/deveco-venv`

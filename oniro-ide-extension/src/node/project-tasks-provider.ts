@@ -25,7 +25,7 @@ export class ProjectTasksProvider implements OniroServer {
         }
 
         const binPath = isWindows ? 'Scripts' : 'bin'; 
-        return `${process.env.DEVECO_PENV_DIR + sep + binPath + sep}hos`
+        return path.join(process.env.DEVECO_PENV_DIR, binPath, 'hos');
     }
 
 

@@ -8,6 +8,7 @@
     "@theia/core": "1.37.0",
     "@theia/filesystem": "1.37.0",
     "@theia/navigator": "1.37.0",
+    "@types/node": "20.2.4",
     "@theia/workspace": "1.37.0",
     "@theia/search-in-workspace": "1.37.0",
     "@theia/debug": "1.37.0"

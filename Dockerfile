@@ -1,10 +1,14 @@
 # syntax=docker/dockerfile:1
 
-ARG NODE_VERSION=16.20.0
-FROM --platform=linux/amd64 node:${NODE_VERSION}-alpine
-RUN apk add --no-cache make pkgconfig gcc g++ python3 libx11-dev libxkbfile-dev libsecret-dev curl
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
-RUN export PATH="$HOME/.cargo/env:$PATH"
+FROM ubuntu:jammy
+RUN apt-get update && \
+    apt-get install -y curl sudo build-essential jq vim && \
+    curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash - && \
+    apt-get install -y nodejs && \
+    npm install -g yarn
+RUN apt-get install -y libsecret-1-dev libxkbfile-dev libc6
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y && \
+    export PATH="$HOME/.cargo/env:$PATH"
 WORKDIR /home/theia
 COPY . .
 RUN yarn && \

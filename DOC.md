@@ -95,6 +95,22 @@ Currently included electron-forge makers for creating distributables from the pa
 - **maker-deb** (*linux*): creates a deb file for installing on debian based linux distributions
 Further configuration and disabling or adding of makers can be done in the apps/electron/forge.config.js file 
 
+## Requirement 3: Account Management
+### Concept Documentation
+Theia cloud uses (Keycloak)[https://www.keycloak.org/] for Account management. So we would recommend doing the same thing or using a similar central Identity and Access Management solution.
+
+For achieving authentication with Keycloak, Theia would be deployed behind a reverse proxy which would authenticate users against a Keycloak instance before allowing access.
+
+After authentication, the theia frontend could then use the Keycloak API to retrieve the authenticated users data. 
+Based on this data the frontend could manage showing/hiding of features or display different perspectives.
+
+To fully disable features for different account types we would also need to implement backend-side authorization. 
+One possibility to archieve this is to create a custom socket.io middleware. 
+Since most features are running under their own separate socket.io namespace, specific namespaces could be blocked through the middleware based on the user data.
+
+
+
+
 ## Requirement 4: VS Code API usage & Theia extension - VS Code extension communication
 ### Design documentation
 #### **Communication between theia and VScodeExtension**

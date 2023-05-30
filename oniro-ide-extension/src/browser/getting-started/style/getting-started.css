@@ -1,0 +1,72 @@
+.oniro-getting-started {
+    display: flex;
+    margin: 20px;
+}
+
+.oniro-getting-started-main-panel {
+    flex-grow: 3;
+}
+
+.oniro-getting-started-side-panel {
+    flex-grow: 1;
+    height: 100%;
+    overflow-y: auto;
+    margin-left: 20px;
+}
+
+.oniro-getting-started-project-tasks {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.oniro-getting-started-task-button {
+    all: unset;
+
+    cursor: pointer;
+    background-color: var(--theia-input-background);
+    border-radius: 5px;
+
+    height: 50px;
+    width: 100%;
+    padding: 10px;
+    margin-right: 10px;
+
+}
+
+.oniro-getting-started-project-search {
+    width: calc(100% - 10px);
+    align-items: center;
+}
+
+.oniro-getting-started-project-search>input {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.oniro-getting-started-project-search>div {
+    position: relative;
+    width: 0;
+    margin-left: -20px;
+    vertical-align: middle;
+}
+
+.oniro-getting-project-table {
+    width: 100%;
+    margin-top: 10px;
+    text-align: left;
+    border: 1px solid var(--theia-editorWidget-border);
+    border-radius: 5px;
+}
+
+.oniro-getting-project-table-data:hover {
+    background-color: grey;
+    cursor: pointer;
+}
+
+.oniro-getting-project-table-data>td, .oniro-getting-project-table-header>th {
+    padding: 10px;
+}
+
+.oniro-getting-project-table-header {
+    background-color: var(--theia-input-background);
+}

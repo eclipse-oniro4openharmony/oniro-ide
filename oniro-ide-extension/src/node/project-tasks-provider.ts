@@ -2,7 +2,7 @@ import { isWindows, URI } from "@theia/core";
 import { injectable } from "@theia/core/shared/inversify";
 import { OniroClient, OniroServer, ProjectTask } from "../common/oniro-protocol";
 import { execFile } from 'child_process'
-import { sep } from 'path'
+import * as path from 'path'
 
 @injectable()
 export class ProjectTasksProvider implements OniroServer {

@@ -97,7 +97,8 @@ Further configuration and disabling or adding of makers can be done in the apps/
 
 ## Requirement 3: Account Management
 ### Concept Documentation
-(Theia cloud)[https://github.com/eclipsesource/theia-cloud/blob/main/doc/docs/Architecture.md] uses (Keycloak)[https://www.keycloak.org/] for Account management. So we would recommend doing the same thing or using a similar central Identity and Access Management solution.
+Theia cloud uses (Keycloak)[https://www.keycloak.org/] for Account management (see https://github.com/eclipsesource/theia-cloud/blob/main/doc/docs/Architecture.md for more details). 
+We would recommend doing the same or using a similar central Identity and Access Management solution.
 
 For achieving authentication with Keycloak, Theia would be deployed behind a reverse proxy which would authenticate users against a Keycloak instance before allowing access.
 

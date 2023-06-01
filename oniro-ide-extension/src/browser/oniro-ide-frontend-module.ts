@@ -29,7 +29,7 @@ export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Un
     bind(MenuContribution).to(LocalizationMenuContribution).inSingletonScope();
     
     bindOniroToolbarContribution(bind,rebind);
-    bindOniroKeybindingsContribution(bind, rebind);
+    bindOniroKeybindingsContribution(bind);
 
     bind(ProjectCreationService).toSelf().inSingletonScope();
     bind(NewProjectWizardFactory).toFactory(ctx => () => createNewProjectWizardContainer(ctx.container).get(WizardDialog<NewProjectConfig>));

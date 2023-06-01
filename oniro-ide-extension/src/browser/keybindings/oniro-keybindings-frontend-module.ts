@@ -7,15 +7,7 @@ import { KeymapContribution } from "./keymap-contribution";
 import { KeymapService } from "./keymap-service";
 import { OniroKeymapPreferenceContribution, OniroKeymapPreferences, OniroKeymapPreferencesSchema } from "./keymap-preferences"
 
-export const bindOniroKeybindingsContribution = (bind: interfaces.Bind, rebind: interfaces.Rebind) => {
-    bind(OniroKeymapPreferenceContribution).toConstantValue({ schema: OniroKeymapPreferencesSchema });
-    bind(PreferenceContribution).toService(OniroKeymapPreferenceContribution);
-    bind(OniroKeymapPreferences).toDynamicValue(ctx => {
-        const factory = ctx.container.get<PreferenceProxyFactory>(PreferenceProxyFactory);
-        return factory(OniroKeymapPreferencesSchema);
-    }).inSingletonScope();
-
-
+export const bindOniroKeybindingsContribution = (bind: interfaces.Bind) => {
     bind(KeymapService).toSelf().inSingletonScope();
     
     bind(KeybindingContribution).to(ARMKeilKeybindingContribution);
@@ -23,4 +15,10 @@ export const bindOniroKeybindingsContribution = (bind: interfaces.Bind, rebind: 
     bind(CommandContribution).to(KeymapContribution);
     bind(MenuContribution).to(KeymapContribution);
 
+    bind(OniroKeymapPreferences).toDynamicValue(ctx => {
+        const factory = ctx.container.get<PreferenceProxyFactory>(PreferenceProxyFactory);
+        return factory(OniroKeymapPreferencesSchema);
+    }).inSingletonScope();
+    bind(OniroKeymapPreferenceContribution).toConstantValue({ schema: OniroKeymapPreferencesSchema });
+    bind(PreferenceContribution).toService(OniroKeymapPreferenceContribution);
 }

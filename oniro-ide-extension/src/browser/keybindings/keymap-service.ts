@@ -55,7 +55,8 @@ export class KeymapService {
 
     registerKeymap(keymap: Keymap, registry: KeybindingRegistry, ...keybindings: Keybinding[]) {
         this.keymaps.push(keymap);
-        this.schema.updateSchemaProperty(ONIRO_KEYMAP_PREFERENCE_ID, {enum: this.keymaps.map(keymaps => keymap.id)})
+        const keymapPreference = this.schema.getSchemaProperty(ONIRO_KEYMAP_PREFERENCE_ID);
+        this.schema.updateSchemaProperty(ONIRO_KEYMAP_PREFERENCE_ID, {...keymapPreference, enum: this.keymaps.map(map => map.id)})
 
         registry.registerKeybindings(...keybindings.map(
             binding => ({

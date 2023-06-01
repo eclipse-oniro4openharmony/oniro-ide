@@ -123,6 +123,20 @@ The operator can deploy new instances of Theia apps using vanilla Kubernetes.
 This means it can be used in any environment with Kubernetes support, such as Google Cloud or AWS.
 Theia-Cloud spawns new pods on demand using a simple HTTP-Request system. That allows it to integrate into existing automation infrastructure.
 
+## Requirement 3: Account Management
+### Concept Documentation
+Theia cloud uses (Keycloak)[https://www.keycloak.org/] for Account management (see https://github.com/eclipsesource/theia-cloud/blob/main/doc/docs/Architecture.md for more details). 
+We would recommend doing the same or using a similar central Identity and Access Management solution.
+
+For achieving authentication with Keycloak, Theia would be deployed behind a reverse proxy which would authenticate users against a Keycloak instance before allowing access.
+
+After authentication, the theia frontend could then use the Keycloak API to retrieve the authenticated users data. 
+Based on this data the frontend could manage showing/hiding of features or display different perspectives.
+
+To fully disable features for different account types we would also need to implement backend-side authorization. 
+One possibility to archieve this is to create a custom socket.io middleware. 
+Since most features are running under their own separate socket.io namespace, specific namespaces could be blocked through the middleware based on the user data.
+
 ## Requirement 4: VS Code API usage & Theia extension - VS Code extension communication
 ### Design documentation
 #### **Communication between theia and VScodeExtension**

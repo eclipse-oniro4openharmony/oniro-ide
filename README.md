@@ -46,6 +46,8 @@ yarn electron watch
 
 ### Running in Docker container
 
+[Install docker](https://docs.docker.com/get-docker/).
+
 To create the docker image `oniro-ide`:
 ```
 docker build -t oniro-ide .

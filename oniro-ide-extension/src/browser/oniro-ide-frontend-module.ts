@@ -20,6 +20,7 @@ import { OniroThemeContribution } from './theme/oniro-theme';
 import { FrontendApplicationContribution, WebSocketConnectionProvider } from '@theia/core/lib/browser';
 import { OniroServer, servicePath } from '../common/oniro-protocol';
 import { ProjectService } from './services/project-service';
+import { bindOniroGettingStartedContribution } from './getting-started/oniro-getting-started-frontend-module';
 import { bindOniroKeybindingsContribution } from './keybindings/oniro-keybindings-frontend-module';
 
 export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Unbind, isBound: interfaces.IsBound, rebind: interfaces.Rebind) => {
@@ -29,6 +30,7 @@ export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Un
     bind(MenuContribution).to(LocalizationMenuContribution).inSingletonScope();
     
     bindOniroToolbarContribution(bind,rebind);
+    bindOniroGettingStartedContribution(bind, rebind);
     bindOniroKeybindingsContribution(bind);
 
     bind(ProjectCreationService).toSelf().inSingletonScope();

@@ -7,9 +7,11 @@ import { OniroClient, OniroServer, servicePath } from '../common/oniro-protocol'
 import { ProjectTasksProvider } from './project-tasks-provider';
 import { BackendApplicationContribution } from "@theia/core/lib/node";
 import { DeviceToolBackendContribution } from './device-tool-backend-contribution';
+import { OniroFileSearch } from './oniro-file-search';
+import { FileSearchService } from '@theia/file-search/lib/common/file-search-service';
 
 
-export default new ContainerModule(bind => {
+export default new ContainerModule((bind, _, __, rebind) => {
     bind(LocalizationContribution).to(OniroLocalizationContribution).inSingletonScope();
 
     bind(ProjectTasksProvider).toSelf().inSingletonScope();
@@ -23,4 +25,5 @@ export default new ContainerModule(bind => {
 
     bind(DeviceToolBackendContribution).toSelf().inSingletonScope();
     bind(BackendApplicationContribution).toService(DeviceToolBackendContribution);
+    rebind(FileSearchService).to(OniroFileSearch).inSingletonScope();
 });

@@ -29,7 +29,8 @@ export class AuthService {
     loginWithBasicAuth(user: string, password: string) {
         // Using Basic auth and storing login data in basic storage is just for the POC. use an Identity for actual release
         localStorage.setItem(AUTH_STORAGE_KEY, `Basic ${Buffer.from(`${user}:${password}`).toString('base64')}`);
-        this.windowService.reload();
+        // cant use window service here because for electron the reload handler is not yet registered 
+        location.reload(); 
     }
 
     logout() {

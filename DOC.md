@@ -137,6 +137,21 @@ To fully disable features for different account types we would also need to impl
 One possibility to archieve this is to create a custom socket.io middleware. 
 Since most features are running under their own separate socket.io namespace, specific namespaces could be blocked through the middleware based on the user data.
 
+### Design documentation
+For the POC authentication is done via Basic Auth. As discussed the Authentication is by default deactivated by the `AUTH_ACIVTE` flag found in `auth-validator-contribution.ts`.
+
+The backend is secured by `AuthRequestValidatorContribution`. This needs to be changed when implementing other authentication methods.
+
+On frontend-side we override the default creation of the websocket in `authenticating-websocket-connection-provider.ts`. Our new websocket contains a `Authorization` header.
+Also we listen for events that signal that the server denied the connection. When that happens we display the `auth-widget` instead of starting the `frontend-application`.
+
+The best way to restart the server connection is to reload the page. 
+Thats why we save save the authentication information locally. 
+This way, at subsequent application start the user does not need to login again.
+
+A logout command is also provided wit a corresponding menu entry in the `file` menu.
+
+
 ## Requirement 4: VS Code API usage & Theia extension - VS Code extension communication
 ### Design documentation
 #### **Communication between theia and VScodeExtension**

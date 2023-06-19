@@ -22,6 +22,7 @@ import { OniroServer, servicePath } from '../common/oniro-protocol';
 import { ProjectService } from './services/project-service';
 import { bindOniroGettingStartedContribution } from './getting-started/oniro-getting-started-frontend-module';
 import { bindOniroKeybindingsContribution } from './keybindings/oniro-keybindings-frontend-module';
+import { bindOniroFrontendAuthContribution } from './auth/oniro-auth-frontend-module';
 
 export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Unbind, isBound: interfaces.IsBound, rebind: interfaces.Rebind) => {
 
@@ -32,6 +33,7 @@ export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Un
     bindOniroToolbarContribution(bind,rebind);
     bindOniroGettingStartedContribution(bind, rebind);
     bindOniroKeybindingsContribution(bind);
+    bindOniroFrontendAuthContribution(bind, rebind);
 
     bind(ProjectCreationService).toSelf().inSingletonScope();
     bind(NewProjectWizardFactory).toFactory(ctx => () => createNewProjectWizardContainer(ctx.container).get(WizardDialog<NewProjectConfig>));

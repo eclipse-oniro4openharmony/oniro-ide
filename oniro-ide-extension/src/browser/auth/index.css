@@ -1,0 +1,27 @@
+.oniro-auth-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--theia-editor-background);
+    color: white;
+}
+
+.oniro-login-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.oniro-login-title {
+    text-align: center;
+}
+
+.oniro-login-input {
+    margin: 5px;
+}
+
+.oniro-login-button {
+    margin: 5px;
+}

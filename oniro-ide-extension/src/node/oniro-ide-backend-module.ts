@@ -9,7 +9,8 @@ import { BackendApplicationContribution } from "@theia/core/lib/node";
 import { DeviceToolBackendContribution } from './device-tool-backend-contribution';
 import { OniroFileSearch } from './oniro-file-search';
 import { FileSearchService } from '@theia/file-search/lib/common/file-search-service';
-
+import { WsRequestValidatorContribution } from '@theia/core/lib/node/ws-request-validators'
+import { AuthRequestValidatorContribution } from './auth/auth-validator-contribution';
 
 export default new ContainerModule((bind, _, __, rebind) => {
     bind(LocalizationContribution).to(OniroLocalizationContribution).inSingletonScope();
@@ -26,4 +27,7 @@ export default new ContainerModule((bind, _, __, rebind) => {
     bind(DeviceToolBackendContribution).toSelf().inSingletonScope();
     bind(BackendApplicationContribution).toService(DeviceToolBackendContribution);
     rebind(FileSearchService).to(OniroFileSearch).inSingletonScope();
+
+    bind(AuthRequestValidatorContribution).toSelf().inSingletonScope();
+    bind(WsRequestValidatorContribution).toService(AuthRequestValidatorContribution);
 });

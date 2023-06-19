@@ -10,17 +10,16 @@ import { AuthService } from './auth-service';
 @injectable()
 export class AuthWidget extends ReactWidget {
 
+    @inject(AuthService) private authService: AuthService;
+
+    private user: string = '';
+    private password: string = '';
+
     protected override onAfterAttach(msg: any) {
         super.onAfterAttach(msg);
         this.update();
-        this.node.classList.add('oniro-auth-screen')
+        this.node.classList.add('oniro-auth-screen');
     }
-
-    private user: string = '';
-    private password: string = ''
-
-    @inject(AuthService) private authService: AuthService
-
 
     protected render(): ReactNode {
         return <Fragment>
@@ -32,5 +31,4 @@ export class AuthWidget extends ReactWidget {
             </div>
         </Fragment>
     }
-    
 }

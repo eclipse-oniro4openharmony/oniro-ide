@@ -6,7 +6,7 @@ import { injectable } from '@theia/core/shared/inversify'
 
 // as disucssed this is a hardcoded switch to activate/deactiveate the authentication
 // deactivated by default in the POC
-const AUTH_ACIVTE = false;
+const AUTH_ACTIVE = true;
 
 
 const HARDCODED_USERNAME = 'user';
@@ -19,7 +19,7 @@ const HARDCODED_PASSWORD = 'password';
 @injectable()
 export class AuthRequestValidatorContribution implements WsRequestValidatorContribution {
     allowWsUpgrade(request: IncomingMessage): MaybePromise<boolean> {
-        if(AUTH_ACIVTE) {
+        if(AUTH_ACTIVE) {
             const auth = request.headers.authorization?.trim();
             if(auth && auth.startsWith('Basic')) {
                 const basicAuth = Buffer.from(auth.split(' ')[1], 'base64').toString();
@@ -28,8 +28,6 @@ export class AuthRequestValidatorContribution implements WsRequestValidatorContr
             }
             return false;
         }
-
         return true;
     }
-
 }

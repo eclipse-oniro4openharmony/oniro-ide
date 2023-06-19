@@ -8,7 +8,7 @@ import { AuthService, AUTH_STORAGE_KEY } from './auth-service';
 export class AuthenticatingWebsocketConnectionProvider extends WebSocketConnectionProvider {
 
     @inject(AuthService)
-    private authService: AuthService;
+    private readonly authService: AuthService;
 
     // cant use auth service in here since its called in the constructor
     protected override createWebSocket(url: string): Socket<DefaultEventsMap, DefaultEventsMap> {
@@ -35,6 +35,4 @@ export class AuthenticatingWebsocketConnectionProvider extends WebSocketConnecti
 
         return socket;
     }
-
-
 }

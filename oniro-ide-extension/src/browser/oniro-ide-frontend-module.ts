@@ -8,7 +8,7 @@ import { LocalizationMenuContribution } from './menus/localization-menu';
 import { NewProjectWizardFactory, createNewProjectWizardContainer } from './wizards/new-project/new-project-wizard';
 import { WizardDialog } from './wizards/wizard-dialog';
 import { NewProjectConfig, ProjectCreationService } from './services/project-creation-service';
-import { FileNavigatorModel, FileNavigatorWidget, NavigatorDecoratorService } from '@theia/navigator/lib/browser';
+import { FileNavigatorModel, FileNavigatorWidget, NavigatorDecoratorService, NavigatorWidgetFactory } from '@theia/navigator/lib/browser';
 import { createFileTreeContainer } from '@theia/filesystem/lib/browser';
 import { FileNavigatorTree } from '@theia/navigator/lib/browser/navigator-tree';
 import { ProjectSelectFileNavigatorWidget } from './views/project-select-file-navigator';
@@ -17,11 +17,12 @@ import { SearchInWorkspaceFrontendContribution } from "@theia/search-in-workspac
 import { DebugFrontendApplicationContribution } from "@theia/debug/lib/browser/debug-frontend-application-contribution"
 import { RightDebugFrontendApplicationContribution, RightSearchInWorkspaceFrontendContribution } from './repositioned-views';
 import { OniroThemeContribution } from './theme/oniro-theme';
-import { FrontendApplicationContribution, WebSocketConnectionProvider } from '@theia/core/lib/browser';
+import { FrontendApplicationContribution, WebSocketConnectionProvider, WidgetFactory } from '@theia/core/lib/browser';
 import { OniroServer, servicePath } from '../common/oniro-protocol';
 import { ProjectService } from './services/project-service';
 import { bindOniroGettingStartedContribution } from './getting-started/oniro-getting-started-frontend-module';
 import { bindOniroKeybindingsContribution } from './keybindings/oniro-keybindings-frontend-module';
+import { createTargethardwareContainer, OniroNavigatorWidgetFactor, TargetHardwareWidget, TARGET_HARDWARE_WIDGET_ID } from './views/target-hardware-widget';
 import { bindOniroFrontendAuthContribution } from './auth/oniro-auth-frontend-module';
 
 export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Unbind, isBound: interfaces.IsBound, rebind: interfaces.Rebind) => {
@@ -56,6 +57,14 @@ export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Un
     bind(OniroServer).toDynamicValue(ctx => {
         const connection = ctx.container.get(WebSocketConnectionProvider);
         return connection.createProxy<OniroServer>(servicePath);
-    });
+    }).inSingletonScope();
     bind(ProjectService).toSelf().inSingletonScope();
+
+    rebind(NavigatorWidgetFactory).to(OniroNavigatorWidgetFactor).inSingletonScope()
+    bind(WidgetFactory).toDynamicValue(ctx => ({
+        id: TARGET_HARDWARE_WIDGET_ID,
+        createWidget() { 
+            return createTargethardwareContainer(ctx.container).get(TargetHardwareWidget);
+        }
+    }))
 });

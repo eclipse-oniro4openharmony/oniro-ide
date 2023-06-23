@@ -11,6 +11,8 @@ export interface OniroClient {
 export const OniroServer = Symbol('OniroServer');
 export interface OniroServer extends JsonRpcServer<OniroClient> {
     getProjectTasks(projectPath: URI): Promise<ProjectTask[]>;
+
+    getBoards(): Promise<Vendor[]>;
 }
 
 export interface ProjectTask {
@@ -18,4 +20,14 @@ export interface ProjectTask {
     name: string;
     title: string;
     icon: string;
+}
+
+export interface Vendor {
+    name: string
+    boards: Board[]
+}
+export interface Board {
+    name: string;
+    vendor: string;
+    supportedOs: ('windows' | 'linux')[]
 }

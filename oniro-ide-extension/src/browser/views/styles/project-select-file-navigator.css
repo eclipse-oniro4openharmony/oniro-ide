@@ -5,5 +5,5 @@
 
 #files .theia-TreeContainer {
     /* The height needs to be aligned with the size of the project/hardware selection */
-    height: calc(100% - 80px);
+    height: calc(100% - 40px);
 }

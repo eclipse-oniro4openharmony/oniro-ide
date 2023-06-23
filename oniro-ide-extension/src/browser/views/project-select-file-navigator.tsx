@@ -20,9 +20,6 @@ export class ProjectSelectFileNavigatorWidget extends FileNavigatorWidget {
                     {<option key="active_project" value="" disabled selected hidden>{nls.localize('oniro/projectSelect/activeProject', 'Active Project')}</option>}
                     {this.workspaceService.tryGetRoots().map(fileStat => <option key={fileStat.resource.toString()}>{fileStat.name}</option>)}
                 </select>
-                <select className='theia-select file-navigator-select' onSelect={this.hardwareSelected}>
-                    <option key="target_hardware" value="" disabled selected hidden>{nls.localize('oniro/projectSelect/targetHardware', 'Target Hardware')}</option>
-                </select>
             </div>
             {super.render()}
         </React.Fragment>
@@ -33,11 +30,4 @@ export class ProjectSelectFileNavigatorWidget extends FileNavigatorWidget {
         this.projectService.activeProjectChanged(this.workspaceService.tryGetRoots()[0].resource)
         console.log(e.currentTarget.selectedOptions.item(0)?.innerHTML)
     }
-
-    private hardwareSelected(e: React.SyntheticEvent<HTMLSelectElement, Event>) {
-        // TODO: use correctly selected hardware
-        this.projectService.hardwareChanged('some hardware')
-        console.log(e.currentTarget.selectedOptions.item(0)?.innerHTML)
-    }
-
 }

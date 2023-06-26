@@ -12,6 +12,14 @@ module.exports = {
             platforms: ['win32']
         },
         {
+            name: '@electron-forge/maker-wix',
+            platforms: ['win32'],
+            config: {
+                manufacturer: 'Huawei'
+            }
+
+        },
+        {
             name: '@electron-forge/maker-dmg',
             platforms: ['darwin']
         },
@@ -54,7 +62,7 @@ module.exports = {
     }
 }
 
-const {exec} = require('child_process');
+const {exec, execSync} = require('child_process');
 async function asyncExec(command, options) {
     return new Promise((resolve, reject) => {
         exec(command, options, (err) => err ? reject(err) : resolve('success'));    

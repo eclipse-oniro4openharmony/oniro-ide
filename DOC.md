@@ -91,6 +91,11 @@ After building the package and distributables, they can be found at `apps/electr
 Currently included electron-forge makers for creating distributables from the package are the following:
 - **maker-zip** (*System Independ*): Will just create a simple zip file containing the electron package
 - **maker-squirrel** (*Windows*): creates a [squirrel executable](https://github.com/Squirrel/Squirrel.Windows) for installing on Windows
+- **maker-wix**: (*Windows*) for creating windows msi installers. to further customize the installer look [here](https://js.electronforge.io/interfaces/_electron_forge_maker_wix.MakerWixConfig.html#language). To use this some prerequisites are needed: 
+  1. .Net Framework 3.5 needs to be installed/enabled in windows features
+  2. The binaries from [wix toolkit 3.x](https://github.com/wixtoolset/wix3/releases/tag/wix3112rtm) are needed (must be version 3, version 4 is not compatible). Download 
+wix311-binaries.zip, unpack it to some directory and add that directory to your `PATH` environment variable.
+  1. The Software version (as defined in the electron/package.json) can't be 0.0.0. Needs to be at least 0.0.1
 - **maker-dmg** (*macOS*): creates a dmg file for installing on macOS
 - **maker-deb** (*linux*): creates a deb file for installing on debian based linux distributions
 Further configuration and disabling or adding of makers can be done in the apps/electron/forge.config.js file 

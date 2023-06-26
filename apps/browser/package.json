@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "oniro-ide-browser",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "dependencies": {
     "@theia/bulk-edit": "1.37.0",
     "@theia/callhierarchy": "1.37.0",

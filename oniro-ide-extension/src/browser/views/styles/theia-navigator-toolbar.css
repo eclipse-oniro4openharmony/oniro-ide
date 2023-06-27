@@ -1,0 +1,25 @@
+#theia-navigator-toolbar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 10px 0;
+}
+
+#theia-navigator-toolbar {
+    width: calc(100% - 20px);
+    background: var(--theia-mainToolbar-background);
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#theia-navigator-toolbar .toolbar-item {
+    padding: 2px;
+    margin: 0 1px;
+    cursor: pointer;
+}
+
+#theia-navigator-toolbar .toolbar-item:hover {
+    background-color: var(--theia-toolbar-hoverBackground);
+}

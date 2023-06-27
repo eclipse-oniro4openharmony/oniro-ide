@@ -12,6 +12,14 @@ module.exports = {
             platforms: ['win32']
         },
         {
+            name: '@electron-forge/maker-wix',
+            platforms: ['win32'],
+            config: {
+                manufacturer: 'Huawei'
+            }
+
+        },
+        {
             name: '@electron-forge/maker-dmg',
             platforms: ['darwin']
         },

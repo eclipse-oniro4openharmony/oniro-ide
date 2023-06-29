@@ -209,3 +209,14 @@ export class DevEcoDeviceToolBackendContribution implements BackendApplicationCo
 } 
 ```
 This would set `DEVECO_PENV_DIR` envionment variable right at the startup of theia before any plugins are loaded so that this variable would then be known to them on startup
+
+## Requirement 6: Remote Development
+
+The remote development feature is currently under review at [#12618](https://github.com/eclipse-theia/theia/pull/12618). The pull request contains instructions on how to test the feature.
+It also contains an architectural outline in its [readme](https://github.com/eclipse-theia/theia/blob/a8b2eeb7cdca7a525db57ac339c425aa7fb6b454/packages/remote/README.md).
+
+Testing this feature together with the current version of the oniro-ide is possible, though quite complicated:
+1. Check out the branch linked to the [pull request](https://github.com/eclipse-theia/theia/pull/12618) and compile the contained TypeScript code via `yarn`.
+2. Link the `@theia/*` dependencies with your locally checked out sources via the `file://` scheme.
+3. Apply backend bundling modifications like done in [#12412](https://github.com/eclipse-theia/theia/pull/12412).
+4. Compile the electron app and perform the same steps as outlined in the original [pull request](https://github.com/eclipse-theia/theia/pull/12618).

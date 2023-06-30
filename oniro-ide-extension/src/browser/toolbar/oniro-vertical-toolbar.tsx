@@ -35,15 +35,15 @@ export class OniroVerticalToolbarImpl extends TabBarToolbar {
     }
 
     @postConstruct()
-    async init(): Promise<void> {
+    init(): void {
         this.hide();
-        await this.model.ready.promise;
-
-        this.updateInlineItems();
-        this.update();
-
-        await this.deferredRef.promise;
+        this.model.ready.promise.then(() => {
+            this.updateInlineItems();
+            this.update();
+        });
     }
+
+
 
     protected updateInlineItems(): void {
         this.inline.clear();

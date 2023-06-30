@@ -217,6 +217,5 @@ It also contains an architectural outline in its [readme](https://github.com/ecl
 
 Testing this feature together with the current version of the oniro-ide is possible, though quite complicated:
 1. Check out the branch linked to the [pull request](https://github.com/eclipse-theia/theia/pull/12618) and compile the contained TypeScript code via `yarn`.
-2. Link the `@theia/*` dependencies with your locally checked out sources via the `file://` scheme.
-3. Apply backend bundling modifications like done in [#12412](https://github.com/eclipse-theia/theia/pull/12412).
-4. Compile the electron app and perform the same steps as outlined in the original [pull request](https://github.com/eclipse-theia/theia/pull/12618).
+2. Link the `@theia/*` dependencies with your locally checked out sources via the `file://` scheme. (don't forgot the newly added `@theia/remote` extension)
+3. Compile the electron app and perform the same steps as outlined in the original [pull request](https://github.com/eclipse-theia/theia/pull/12618).

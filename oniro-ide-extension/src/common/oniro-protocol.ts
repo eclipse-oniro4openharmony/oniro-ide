@@ -1,4 +1,4 @@
-import { JsonRpcServer, URI } from "@theia/core";
+import { URI } from "@theia/core";
 
 export const servicePath = '/services/oniro-ide'
 
@@ -9,9 +9,8 @@ export interface OniroClient {
 
 
 export const OniroServer = Symbol('OniroServer');
-export interface OniroServer extends JsonRpcServer<OniroClient> {
+export interface OniroServer {
     getProjectTasks(projectPath: URI): Promise<ProjectTask[]>;
-
     getBoards(): Promise<Vendor[]>;
 }
 

@@ -3,7 +3,7 @@ node_modules
 lib
 plugins/
 src-gen/
-gen-webpack.config.js
+gen-webpack.*.js
 *.log
 *-app/*
 !*-app/package.json

@@ -4,7 +4,7 @@
   "author": "Typefox",
   "description": "Huawei Oniro IDE",
   "version": "0.0.0",
-  "main": "src-gen/frontend/electron-main.js",
+  "main": "lib/backend/electron-main.js",
   "dependencies": {
     "@theia/bulk-edit": "1.39.0",
     "@theia/callhierarchy": "1.39.0",

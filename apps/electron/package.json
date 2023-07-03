@@ -4,7 +4,7 @@
   "author": "Typefox",
   "description": "Huawei Oniro IDE",
   "version": "0.0.0",
-  "main": "src-gen/frontend/electron-main.js",
+  "main": "lib/backend/electron-main.js",
   "dependencies": {
     "@theia/bulk-edit": "1.39.0",
     "@theia/callhierarchy": "1.39.0",
@@ -52,16 +52,10 @@
     "oniro-ide-extension": "0.0.0"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.1.1",
-    "@electron-forge/maker-deb": "^6.1.1",
-    "@electron-forge/maker-dmg": "^6.1.1",
-    "@electron-forge/maker-rpm": "^6.1.1",
-    "@electron-forge/maker-squirrel": "^6.1.1",
-    "@electron-forge/maker-wix": "^6.1.1",
-    "@electron-forge/maker-zip": "^6.1.1",
+    "electron-builder": "24.4.0",
     "@theia/cli": "1.39.0",
     "electron": "^23.2.4",
-    "electron-wix-msi": "^5.0.0"
+    "rimraf": "^5.0.1"
   },
   "scripts": {
     "compile": "lerna run build --scope=oniro-ide-extension && yarn build",
@@ -70,8 +64,9 @@
     "watch:compile": "lerna run watch --scope=oniro-ide-extension",
     "watch:bundle": "theia build --watch --mode development",
     "rebuild": "theia rebuild:electron --cacheRoot ../..",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "clean:dist": "rimraf dist",
+    "package": "yarn clean:dist && yarn -s rebuild && electron-builder -c.mac.identity=null --publish never",
+    "dist" : "yarn && yarn build && yarn rebuild && yarn package"
   },
   "theia": {
     "target": "electron",

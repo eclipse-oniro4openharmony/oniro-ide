@@ -1,6 +1,6 @@
 import { MAXIMIZED_CLASS } from '@theia/core/lib/browser/shell/theia-dock-panel';
 import { ApplicationShellWithToolbarOverride } from '@theia/toolbar/lib/browser/application-shell-with-toolbar-override';
-import { inject, injectable, postConstruct } from '@theia/core/shared/inversify';
+import { inject, injectable } from '@theia/core/shared/inversify';
 import { BoxPanel, Layout, SplitPanel } from '@theia/core/lib/browser';
 import { OniroVerticalToolbar, OniroVerticalToolbarFactory } from './oniro-toolbar-interfaces';
 import { ONIRO_TOOLBAR_SIDE_ID, OniroToolbarPreferences } from './oniro-toolbar-preference-contribution';
@@ -16,14 +16,12 @@ export class OniroApplicationShellToolbarOverride extends ApplicationShellWithTo
     protected leftToolbar: OniroVerticalToolbar;
     protected rightToolbar: OniroVerticalToolbar;
 
-    @postConstruct()
-    protected override async init(): Promise<void> {
+    protected override async doInit(): Promise<void> {
         this.leftToolbar = this.verticalToolbarFactory();
         this.leftToolbar.id = 'left-toolbar';
         this.rightToolbar = this.verticalToolbarFactory();
         this.rightToolbar.id = 'right-toolbar';
-        super.init();
-        await this.toolbarPreferences.ready;
+        await super.doInit();
         this.tryShowVerticalToolbar();
         this.mainPanel.onDidToggleMaximized(() => {
             this.tryShowVerticalToolbar();

@@ -19,12 +19,12 @@ const HARDCODED_PASSWORD = 'password';
 @injectable()
 export class AuthRequestValidatorContribution implements WsRequestValidatorContribution {
     allowWsUpgrade(request: IncomingMessage): MaybePromise<boolean> {
-        if(AUTH_ACTIVE) {
+        if (AUTH_ACTIVE) {
             const auth = request.headers.authorization?.trim();
-            if(auth && auth.startsWith('Basic')) {
+            if (auth && auth.startsWith('Basic')) {
                 const basicAuth = Buffer.from(auth.split(' ')[1], 'base64').toString();
                 const [username, password] = basicAuth.split(':');
-                return username === HARDCODED_USERNAME && password === HARDCODED_PASSWORD; 
+                return username === HARDCODED_USERNAME && password === HARDCODED_PASSWORD;
             }
             return false;
         }

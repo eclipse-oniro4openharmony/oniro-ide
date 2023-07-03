@@ -35,7 +35,11 @@ export class HardwareTree extends TreeImpl {
     private oniroServer: OniroServer;
 
     @postConstruct()
-    async init() {
+    init(): void {
+        this.doInit();
+    }
+
+    private async doInit(): Promise<void> {
         const vendors = await this.oniroServer.getBoards();
         
         const root = <ExpandableTreeNode>{

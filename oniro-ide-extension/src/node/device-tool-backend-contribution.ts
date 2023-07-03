@@ -20,45 +20,42 @@ const defaultElectronDir = `${process.cwd()}/../DevEco-Device-Tool/core/deveco-v
 @injectable()
 export class DeviceToolBackendContribution implements BackendApplicationContribution {
 
-
     initialize(): void {
-        if(!process.env.DEVECO_PENV_DIR) {
-            process.env.DEVECO_PENV_DIR = this.resolveDevEcoDeviceToolDir() 
+        if (!process.env.DEVECO_PENV_DIR) {
+            process.env.DEVECO_PENV_DIR = this.resolveDevEcoDeviceToolDir()
         }
     }
 
     private resolveDevEcoDeviceToolDir(): string {
-        if(fs.pathExistsSync(defaultElectronDir)) {
+        if (fs.pathExistsSync(defaultElectronDir)) {
             return defaultElectronDir;
         }
 
         const searchPaths = isWindows ? windowsSearchPaths : unixSearchPaths;
-        for(const searchPath of searchPaths.filter(path => fs.pathExistsSync(path))) {
-            if(fs.pathExistsSync(searchPath)) {
+        for (const searchPath of searchPaths.filter(path => fs.pathExistsSync(path))) {
+            if (fs.pathExistsSync(searchPath)) {
                 const devEcoDir = this.searchDevEcoInstallDir(searchPath, 3);
-                if(devEcoDir) {
+                if (devEcoDir) {
                     return path.join(devEcoDir, 'core', 'deveco-venv');
                 }
             }
         }
-        
-        throw new Error('could not find DevEco Device tool install location')
-        
+        throw new Error('could not find DevEco Device tool install location');
     }
 
     private searchDevEcoInstallDir(searchPath: string, maxDepth: number): string | undefined {
-        const subDirecotries = fs.readdirSync(searchPath).filter(dirName => { 
+        const subDirecotries = fs.readdirSync(searchPath).filter(dirName => {
             try {
-                return fs.lstatSync(path.join(searchPath, dirName)).isDirectory() 
+                return fs.lstatSync(path.join(searchPath, dirName)).isDirectory()
             } catch {
                 return false
             }
-            });
+        });
 
-        for(const dirname of subDirecotries) {
-            if(dirname === 'DevEco-Device-Tool') {
+        for (const dirname of subDirecotries) {
+            if (dirname === 'DevEco-Device-Tool') {
                 return path.join(searchPath, dirname);
-            } else if(maxDepth > 0) {
+            } else if (maxDepth > 0) {
                 return this.searchDevEcoInstallDir(path.join(searchPath, dirname), maxDepth - 1);
             }
         }

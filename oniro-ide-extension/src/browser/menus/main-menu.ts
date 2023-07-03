@@ -1,20 +1,10 @@
 import { injectable } from "@theia/core/shared/inversify";
-import { BrowserMainMenuFactory, DynamicMenuBarWidget, MenuBarWidget } from "@theia/core/lib/browser/menu/browser-menu-plugin";
-import { CompoundMenuNode, CompoundMenuNodeRole, MAIN_MENU_BAR, nls } from "@theia/core";
+import { BrowserMainMenuFactory, MenuBarWidget } from "@theia/core/lib/browser/menu/browser-menu-plugin";
+import { CompoundMenuNode, CompoundMenuNodeRole, MAIN_MENU_BAR } from "@theia/core";
 import { codicon } from "@theia/core/lib/browser";
 
 @injectable()
 export class OniroMainMenuFactory extends BrowserMainMenuFactory {
-
-    protected showMenuBar(menuBar: DynamicMenuBarWidget, preference: string | undefined): void {
-        if (preference && ['classic', 'visible'].includes(preference)) {
-            menuBar.clearMenus();
-            this.fillMenuBar(menuBar);
-        } else {
-            menuBar.clearMenus();
-        }
-    }
-
     protected fillMenuBar(menuBar: MenuBarWidget): void {
         const menuModel = this.menuProvider.getMenu(MAIN_MENU_BAR);
         const menuCommandRegistry = this.createMenuCommandRegistry(menuModel);

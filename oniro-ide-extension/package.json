@@ -25,6 +25,10 @@
     {
       "frontend": "lib/browser/oniro-ide-frontend-module",
       "backend": "lib/node/oniro-ide-backend-module"
+    },
+    {
+      "frontend": "lib/browser/oniro-ide-browser-frontend-module",
+      "frontendElectron": "lib/electron-browser/oniro-ide-electron-frontend-module"
     }
   ]
 }

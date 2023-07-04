@@ -24,8 +24,6 @@ import { bindOniroGettingStartedContribution } from './getting-started/oniro-get
 import { bindOniroKeybindingsContribution } from './keybindings/oniro-keybindings-frontend-module';
 import { createTargethardwareContainer, OniroNavigatorWidgetFactor, TargetHardwareWidget, TARGET_HARDWARE_WIDGET_ID } from './views/target-hardware-widget';
 import { bindOniroFrontendAuthContribution } from './auth/oniro-auth-frontend-module';
-import { BrowserMainMenuFactory } from '@theia/core/lib/browser/menu/browser-menu-plugin';
-import { OniroMainMenuFactory } from './menus/main-menu';
 
 export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Unbind, isBound: interfaces.IsBound, rebind: interfaces.Rebind) => {
 
@@ -33,8 +31,6 @@ export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Un
     bind(MenuContribution).to(ProjectMenuContribution).inSingletonScope();
     bind(MenuContribution).to(LocalizationMenuContribution).inSingletonScope();
     
-    rebind(BrowserMainMenuFactory).to(OniroMainMenuFactory).inSingletonScope();
-
     bindOniroToolbarContribution(bind,rebind);
     bindOniroGettingStartedContribution(bind, rebind);
     bindOniroKeybindingsContribution(bind);

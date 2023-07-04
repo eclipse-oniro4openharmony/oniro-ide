@@ -28,7 +28,7 @@
     },
     {
       "frontend": "lib/browser/oniro-ide-browser-frontend-module",
-      "frontendElectron": "lib/browser/oniro-ide-electron-frontend-module"
+      "frontendElectron": "lib/electron-browser/oniro-ide-electron-frontend-module"
     }
   ]
 }

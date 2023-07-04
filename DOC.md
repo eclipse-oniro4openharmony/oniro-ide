@@ -81,25 +81,18 @@ class WizardCommands implements CommandContribution {
 ## Requirement 2: Multiplatform Desktop IDE and Web IDE
 ### Design documentation
 #### Desktop Application Build
-The Theia desktop application is realized through electron. For the Oniro IDE [electron-forge](https://www.electronforge.io/) is used for building the different distributables.
-To install all dependencies required by electron forge first execute `yarn` in the root directory.
-execute `yarn electron make` to package the application and build the distributables. 
-execute `yarn electron package` for just creating the package without building the distributables. 
-The packaging step can take a while. 
-After building the package and distributables, they can be found at `apps/electron/out`. The `oniro-ide-electron-{your platform}` folder contains the package while the `make` folder contains the distributables   
+As previously discussed, we have migrated the electron bundling process to electron-builder. To generate the electron installer, you have two options: `yarn electron dist` and `yarn electron package`.
 
-Currently included electron-forge makers for creating distributables from the package are the following:
-- **maker-zip** (*System Independ*): Will just create a simple zip file containing the electron package
-- **maker-squirrel** (*Windows*): creates a [squirrel executable](https://github.com/Squirrel/Squirrel.Windows) for installing on Windows
-- **maker-wix**: (*Windows*) for creating windows msi installers. to further customize the installer look [here](https://js.electronforge.io/interfaces/_electron_forge_maker_wix.MakerWixConfig.html#language). To use this some prerequisites are needed: 
-  1. .Net Framework 3.5 needs to be installed/enabled in windows features
-  2. The binaries from [wix toolkit 3.x](https://github.com/wixtoolset/wix3/releases/tag/wix3112rtm) are needed (must be version 3, version 4 is not compatible). Download 
-wix311-binaries.zip, unpack it to some directory and add that directory to your `PATH` environment variable.
-  1. The Software version (as defined in the electron/package.json) can't be 0.0.0. Needs to be at least 0.0.1
-- **maker-dmg** (*macOS*): creates a dmg file for installing on macOS
-- **maker-deb** (*linux*): creates a deb file for installing on debian based linux distributions
-Further configuration and disabling or adding of makers can be done in the apps/electron/forge.config.js file 
+When using `yarn electron dist`, all the prerequisites are taken care of, such as installing dependencies, rebuilding native dependencies, and building the application itself. 
+On the other hand, if you prefer to use yarn electron package, please ensure that the electron application is ready for execution by running `yarn electron start`.
 
+Both of these tasks create the package installers for the current operating systems. 
+- For Windows: NSIS
+- For Linux: deb and AppImage 
+- For macOS: dmg and zip.
+
+If you wish to fine-tune the process, you can easily configure it through the electron-builder.yml file. 
+This allows for further customization of the installers to meet your specific requirements and preferences.
 #### Cloud Deployment
 
 ##### Docker Image

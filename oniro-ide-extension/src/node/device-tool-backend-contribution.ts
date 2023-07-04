@@ -1,7 +1,7 @@
 import { isWindows } from "@theia/core";
 import { BackendApplicationContribution } from "@theia/core/lib/node";
 import { injectable } from "@theia/core/shared/inversify";
-import * as fs from 'fs-extra'
+import * as fs from '@theia/core/shared/fs-extra'
 import * as path from 'path'
 import { homedir } from 'os'
 

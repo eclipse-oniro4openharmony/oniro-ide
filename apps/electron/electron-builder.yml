@@ -1,0 +1,55 @@
+appId: eclipse.theia
+productName: Oniro-IDE
+electronDist: ../../node_modules/electron/dist
+electronVersion: 23.2.4
+# Although it is generally not recommended to disable asar, it is required for Theia.
+# Enabling this leads to: process ERROR Error: spawn ENOTDIR
+# because binaries can not be executed from the asar archive.
+# See asar file API limitations: https://www.electronjs.org/docs/tutorial/application-packaging#limitations-of-the-node-api
+asar: false
+nodeGypRebuild: false
+npmRebuild: false
+
+directories:
+  buildResources: resources
+
+# node_modules and package.json are copied automatically
+# Copying node_modules must be automatic for correct resolvement of binaries.
+# Furthermore, This reduces bundle sizes significantly because it avoids duplicates of the electron runtime.
+files:
+  - lib
+  - scripts
+  - "!**node_modules/**"
+extraResources:
+  - from: plugins
+    to: app/plugins
+
+win:
+  target:
+  - zip
+  - nsis
+mac:
+  category: public.app-category.developer-tools
+  darkModeSupport: true
+  target:
+    - dmg
+    - zip
+linux:
+  category: Development
+  target:
+    - deb
+    - AppImage
+
+nsis:
+  menuCategory: true
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  runAfterFinish: false
+  artifactName: ${productName}.${ext}
+dmg:
+  artifactName: ${productName}.${ext}
+deb:
+  artifactName: ${productName}.${ext}
+appImage:
+  artifactName: ${productName}.${ext}

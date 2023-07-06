@@ -18,8 +18,8 @@ export class OniroNavigatorWidgetFactor extends NavigatorWidgetFactory {
 
     override async createWidget(): Promise<ViewContainer> {
         const viewContainer = await super.createWidget();
-        const targetHardwareWidget = await this.widgetManager.getOrCreateWidget(TARGET_HARDWARE_WIDGET_ID)
-        viewContainer.addWidget(targetHardwareWidget, this.targetHardwareWidgetOptions);
+        // const targetHardwareWidget = await this.widgetManager.getOrCreateWidget(TARGET_HARDWARE_WIDGET_ID)
+        // viewContainer.addWidget(targetHardwareWidget, this.targetHardwareWidgetOptions);
         return viewContainer
     }
 }

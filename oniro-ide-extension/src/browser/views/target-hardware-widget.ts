@@ -3,7 +3,7 @@ import { inject, injectable, interfaces, postConstruct } from "@theia/core/share
 import { NavigatorWidgetFactory } from "@theia/navigator/lib/browser";
 import { OniroServer } from "../../common/oniro-protocol";
 
-export const TARGET_HARDWARE_WIDGET_ID = 'onir.target-hardware'
+export const TARGET_HARDWARE_WIDGET_ID = 'oniro.target-hardware'
 
 export class OniroNavigatorWidgetFactor extends NavigatorWidgetFactory {
 
@@ -11,15 +11,14 @@ export class OniroNavigatorWidgetFactor extends NavigatorWidgetFactory {
         order: -1,
         canHide: false,
         initiallyCollapsed: false,
-        weight: 80,
         disableDraggingToOtherContainers: true
     };
 
 
     override async createWidget(): Promise<ViewContainer> {
         const viewContainer = await super.createWidget();
-        // const targetHardwareWidget = await this.widgetManager.getOrCreateWidget(TARGET_HARDWARE_WIDGET_ID)
-        // viewContainer.addWidget(targetHardwareWidget, this.targetHardwareWidgetOptions);
+        const targetHardwareWidget = await this.widgetManager.getOrCreateWidget(TARGET_HARDWARE_WIDGET_ID)
+        viewContainer.addWidget(targetHardwareWidget, this.targetHardwareWidgetOptions);
         return viewContainer
     }
 }
@@ -74,11 +73,12 @@ export class HardwareTree extends TreeImpl {
 
 @injectable()
 export class TargetHardwareWidget extends TreeWidget {
+
     @postConstruct()
     protected init(): void {
         super.init();
         this.title.label = 'Target Hardware'
-
+        this.id = TARGET_HARDWARE_WIDGET_ID;
         this.node.style.height = '100%'
     }
 }

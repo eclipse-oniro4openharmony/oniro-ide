@@ -2,6 +2,7 @@
     position: relative;
 }
 
+#oniro-toolbar-layout-selection .icon-wrapper,
 #oniro-toolbar-side-contribution .icon-wrapper {
     cursor: pointer;
     margin-left: 0;
@@ -13,7 +14,8 @@
     outline: none;
 }
 
-#oniro-toolbar-side-contribution  .icon-wrapper.action-label.item.enabled:hover {
+#oniro-toolbar-layout-selection .icon-wrapper.action-label.item.enabled:hover
+#oniro-toolbar-side-contribution .icon-wrapper.action-label.item.enabled:hover {
     background-color: var(--theia-toolbar-hoverBackground);
 }
 

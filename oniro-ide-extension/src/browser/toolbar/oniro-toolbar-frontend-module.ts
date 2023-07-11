@@ -16,12 +16,17 @@ import { OniroVerticalToolbarImpl } from './oniro-vertical-toolbar';
 import { OniroVerticalToolbarController } from './oniro-vertical-toolbar-controller';
 import { OniroVerticalToolbarFactory, OniroVerticalToolbar } from './oniro-toolbar-interfaces';
 import { OniroToolbarPreferences, OniroToolbarPreferencesContribution, OniroToolbarPreferencesSchema } from './oniro-toolbar-preference-contribution';
+import { LayoutSelectionContribution } from './layout/layout-selection';
 
 export const bindOniroToolbarContribution = (bind: interfaces.Bind, rebind: interfaces.Rebind) => {
     bind(OniroToolbarSideContribution).toSelf().inSingletonScope();
     bind(ToolbarContribution).toService(OniroToolbarSideContribution);
     bind(CommandContribution).toService(OniroToolbarSideContribution);
     bind(MenuContribution).toService(OniroToolbarSideContribution);
+    bind(LayoutSelectionContribution).toSelf().inSingletonScope();
+    bind(ToolbarContribution).toService(LayoutSelectionContribution);
+    bind(CommandContribution).toService(LayoutSelectionContribution);
+    bind(MenuContribution).toService(LayoutSelectionContribution);
     bind(OniroToolbarManagerContribution).toSelf().inSingletonScope();
     bind(CommandContribution).toService(OniroToolbarManagerContribution);
     bind(OniroToolbarCommands).toSelf().inSingletonScope();

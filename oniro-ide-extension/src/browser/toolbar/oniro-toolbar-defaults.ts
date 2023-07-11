@@ -3,6 +3,7 @@ import { OniroToolbarSideContribution } from './layout/oniro-toolbar-side-contri
 import { FILE_NAVIGATOR_TOGGLE_COMMAND_ID } from '@theia/navigator/lib/browser/navigator-contribution';
 import { interfaces } from '@theia/core/shared/inversify';
 import { OniroToolbarPreferences, ONIRO_TOOLBAR_SIDE_ID } from './oniro-toolbar-preference-contribution';
+import { LayoutSelectionContribution } from './layout/layout-selection';
 
 // This file specifies the default layout of the toolbar. This binding should be overridden for extenders.
 // Both Toolbar Command Items and Toolbar Contributions can be specified here.
@@ -15,6 +16,10 @@ export const OniroToolbarDefaults: (ctx: interfaces.Context) => () => DeflatedTo
             [
                 {
                     id: OniroToolbarSideContribution.ID,
+                    group: 'contributed'
+                },
+                {
+                    id: LayoutSelectionContribution.ID,
                     group: 'contributed'
                 }
             ]

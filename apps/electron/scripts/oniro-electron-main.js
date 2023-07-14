@@ -5,4 +5,5 @@ process.env.THEIA_DEFAULT_PLUGINS = `local-dir:${path.resolve(
   '..',
   'plugins'
 )}`;
-require('../src-gen/frontend/electron-main.js');
+console.log(`THEIA_DEFAULT_PLUGINS: ${process.env.THEIA_DEFAULT_PLUGINS}`);
+require('../lib/backend/electron-main.js');

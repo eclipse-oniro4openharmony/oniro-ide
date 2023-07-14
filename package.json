@@ -27,21 +27,23 @@
   "theiaPluginsDir": "plugins",
   "theiaPlugins": {
     "vscode.markdown-language-features": "https://open-vsx.org/api/vscode/markdown-language-features/1.64.2/file/vscode.markdown-language-features-1.64.2.vsix",
-    "eclipse-theia.builtin-extension-pack": "https://open-vsx.org/api/eclipse-theia/builtin-extension-pack/1.70.2/file/eclipse-theia.builtin-extension-pack-1.70.2.vsix",
+    "eclipse-theia.builtin-extension-pack": "https://open-vsx.org/api/eclipse-theia/builtin-extension-pack/1.77.0/file/eclipse-theia.builtin-extension-pack-1.77.0.vsix",
     "EditorConfig.EditorConfig": "https://open-vsx.org/api/EditorConfig/EditorConfig/0.14.4/file/EditorConfig.EditorConfig-0.14.4.vsix",
     "dbaeumer.vscode-eslint": "https://open-vsx.org/api/dbaeumer/vscode-eslint/2.1.20/file/dbaeumer.vscode-eslint-2.1.20.vsix",
-    "llvm-vs-code-extensions.vscode-clangd": "https://open-vsx.org/api/llvm-vs-code-extensions/vscode-clangd/0.1.23/file/llvm-vs-code-extensions.vscode-clangd-0.1.23.vsix",
+    "llvm-vs-code-extensions.vscode-clangd": "https://open-vsx.org/api/llvm-vs-code-extensions/vscode-clangd/0.1.24/file/llvm-vs-code-extensions.vscode-clangd-0.1.24.vsix",
     "eclipse-cdt.cdt-gdb-vscode": "https://open-vsx.org/api/eclipse-cdt/cdt-gdb-vscode/0.0.96/file/eclipse-cdt.cdt-gdb-vscode-0.0.96.vsix",
-    "rust-analyzer": "https://open-vsx.org/api/rust-lang/rust-analyzer/${targetPlatform}/0.4.1473/file/rust-lang.rust-analyzer-0.4.1473@${targetPlatform}.vsix",
-    "CodeLLDB": "https://open-vsx.org/api/vadimcn/vscode-lldb/1.9.0/file/vadimcn.vscode-lldb-1.9.0.vsix"
+    "rust-analyzer": "https://open-vsx.org/api/rust-lang/rust-analyzer/${targetPlatform}/0.4.1585/file/rust-lang.rust-analyzer-0.4.1585@${targetPlatform}.vsix",
+    "CodeLLDB": "https://open-vsx.org/api/vadimcn/vscode-lldb/1.9.2/file/vadimcn.vscode-lldb-1.9.2.vsix"
   },
   "theiaPluginsExcludeIds": [
     "ms-vscode.js-debug-companion",
     "vscode.extension-editing",
+    "vscode.git",
+    "vscode.git-base",
     "vscode.github",
     "vscode.github-authentication",
-    "vscode.ipynb",
     "vscode.microsoft-authentication",
-    "ms-vscode.references-view"
+    "ms-vscode.references-view",
+    "vscode.ipynb"
   ]
 }

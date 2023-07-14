@@ -12,7 +12,8 @@
             "args": [
                 "--loglevel=debug",
                 "--port=3000",
-                "--no-cluster"
+                "--no-cluster",
+                "--plugins=local-dir:plugins",
             ],
             "env": {
                 "NODE_ENV": "development"
@@ -40,7 +41,8 @@
             "args": [
                 "--loglevel=debug",
                 "--hostname=localhost",
-                "--no-cluster"
+                "--no-cluster",
+                "--plugins=local-dir:plugins"
             ],
             "env": {
                 "NODE_ENV": "development"

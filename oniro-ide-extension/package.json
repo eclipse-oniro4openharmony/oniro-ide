@@ -12,7 +12,8 @@
     "@theia/workspace": "1.39.0",
     "@theia/search-in-workspace": "1.39.0",
     "@theia/debug": "1.39.0",
-    "@theia/getting-started": "1.39.0"
+    "@theia/getting-started": "1.39.0",
+    "@theia/plugin-ext": "1.39.0"
   },
   "devDependencies": {
   },

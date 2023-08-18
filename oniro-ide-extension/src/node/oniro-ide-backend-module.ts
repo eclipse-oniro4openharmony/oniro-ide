@@ -7,8 +7,8 @@ import { OniroServer, servicePath } from '../common/oniro-protocol';
 import { DeviceToolProvider } from './device-tool-provider';
 import { BackendApplicationContribution } from "@theia/core/lib/node";
 import { DeviceToolBackendContribution } from './device-tool-backend-contribution';
-import { WsRequestValidatorContribution } from '@theia/core/lib/node/ws-request-validators'
-import { AuthRequestValidatorContribution } from './auth/auth-validator-contribution';
+// import { WsRequestValidatorContribution } from '@theia/core/lib/node/ws-request-validators'
+// import { AuthRequestValidatorContribution } from './auth/auth-validator-contribution';
 
 export default new ContainerModule(bind => {
     bind(LocalizationContribution).to(OniroLocalizationContribution).inSingletonScope();
@@ -24,6 +24,6 @@ export default new ContainerModule(bind => {
     bind(DeviceToolBackendContribution).toSelf().inSingletonScope();
     bind(BackendApplicationContribution).toService(DeviceToolBackendContribution);
 
-    bind(AuthRequestValidatorContribution).toSelf().inSingletonScope();
-    bind(WsRequestValidatorContribution).toService(AuthRequestValidatorContribution);
+    // bind(AuthRequestValidatorContribution).toSelf().inSingletonScope();
+    // bind(WsRequestValidatorContribution).toService(AuthRequestValidatorContribution);
 });
